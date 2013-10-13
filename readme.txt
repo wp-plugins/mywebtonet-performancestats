@@ -1,0 +1,39 @@
+=== Plugin Name ===
+Contributors: mywebtonet
+Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
+Contributors: Mywebtonet 
+Tags: performance, testing, web, mysql, php
+Requires at least: 3.4.1
+Tested up to: 3.6.1
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+This plugin is a simple plugin that gives you information about the
+CPU performance of your PHP web and MySQL database backend.
+
+== Description ==
+
+You can easily determine the CPU performance allocated for your PHP web and MySQL
+server with this plugin. This script does some simple calculations, string
+manipulations and some simple CPU tests on your MySQL backend.
+
+There are many factors for a fast server, this plugin does not test eg. for
+how many hits a second your provider allows to your web, filesystem
+performance is not testet either. Use it as a simple test and compare with
+your friends stats from their provider. 
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+e.g.
+
+1. Upload `mywebtonet-performancestats` folder after extracting the zip file, upload  to the `/wp-content/plugins/` directory or simply upload the zip file from the admin panel.
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Click Performance test in the menu!
+
+== Changelog ==
+
+= 1.0 =
+* This is the first stable release of this plugin
