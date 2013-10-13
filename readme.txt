@@ -1,8 +1,7 @@
 === Plugin Name ===
 Contributors: mywebtonet
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
-Contributors: Mywebtonet 
-Tags: performance, testing, web, mysql, php
+Tags: performance testing webserver mysql php
 Requires at least: 3.4.1
 Tested up to: 3.6.1
 Stable tag: 1.0
