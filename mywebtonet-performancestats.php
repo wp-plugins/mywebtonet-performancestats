@@ -150,6 +150,7 @@ function mywebtonetperftest_plugin_go() {
 	<input type='hidden' name='testloopresult' value='<? echo $testloopresult ?>'>
 	<input type='hidden' name='ifelseresult' value='<? echo $testifelseresult ?>'>
 	<input type='hidden' name='mysqlresults' value='<? echo $mysqltemp ?>'>
+	<input type='hidden' name='phpmemorylimit' value='<? echo $memorylimit ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	<font face="Verdana,Arial" size="2">	
 	<?
