@@ -40,7 +40,7 @@ e.g.
 * This is the first stable release of this plugin
 
 = 1.0.1 =
-* Minor correction in submit results section.
+* Minor correction in the submit results section.
 
 == Upgrade Notice ==
 
