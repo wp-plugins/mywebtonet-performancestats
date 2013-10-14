@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: mywebtonet
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
-Tags: php, mysql, performance, testing, speed
+Tags: php, mysql, performance, testing, speed, dyno test
 Requires at least: 3.4.1
 Tested up to: 3.6.1
 Stable tag: 1.0
@@ -10,6 +10,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 This plugin is a simple plugin that gives you information about the
 CPU performance of your PHP web and MySQL database backend.
+
+It's like dyno testing a car, except this is FREE :-)
 
 == Description ==
 
