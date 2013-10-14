@@ -24,7 +24,7 @@ to evaluate.
 
 There are many factors for a fast server, this plugin does not test eg. for
 how many hits a second your provider allows to your web, filesystem
-performance is not testet either. Use it as a simple test and compare with
+performance is not tested either. Use it as a simple test and compare with
 your friends statistics from their provider. 
 
 == Installation ==
