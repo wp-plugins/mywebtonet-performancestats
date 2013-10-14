@@ -71,10 +71,10 @@ function mywebtonetperftest_plugin_go() {
 	//		
 	echo "<br><br><table>\n";
 	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font><br>\nPHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b><br><br></td></tr>\n"; 
+	echo "<tr><td>PHP host information : <font color='blue'>$phpuname</font></td></tr>\n";
 	echo "</table>\n";
-	echo "<br><table>\n";
-	echo "<tr><td>PHP host information : $phpuname</td></tr>\n";
 
+	echo "<table>\n";
 	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
 	for ($i = 0; $i < $count; $i++) {
 		$time_start = microtime(true);
