@@ -1,7 +1,7 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0
+ * @version 1.01
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
