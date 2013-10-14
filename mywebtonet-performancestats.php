@@ -70,8 +70,9 @@ function mywebtonetperftest_plugin_go() {
 	$phpuname=php_uname();
 	//		
 	echo "<br><br><table>\n";
-	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font><br>\nPHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b><br><br></td></tr>\n"; 
-	echo "<tr><td>PHP host information : <font color='blue'>$phpuname</font></td></tr>\n";
+	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font></td></tr>\n";
+	echo "<tr><td>PHP host information : <font color='blue'>$phpuname</font></td></tr>\n";	
+	echo "<tr><td>PHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b></td></tr>\n"; 
 	echo "</table>\n";
 
 	echo "<table>\n";
