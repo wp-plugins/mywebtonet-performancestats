@@ -57,7 +57,7 @@ function mywebtonetperftest_plugin_go() {
 	</center>
 	<?
 	flush();
-	echo "<br><br><table>\n";
+	
 	global $wpdb;
 	global $mysqltests;
 	echo $DB_HOST;
@@ -69,7 +69,10 @@ function mywebtonetperftest_plugin_go() {
 	$phpos=PHP_OS;
 	$phpuname=php_uname();
 	//		
+	echo "<br><br><table>\n";
 	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font><br>\nPHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b><br><br></td></tr>\n"; 
+	echo "</table>\n";
+	echo "<br><table>\n";
 	echo "<tr><td>PHP host information : $phpuname</td></tr>\n";
 
 	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
