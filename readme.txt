@@ -12,7 +12,7 @@ This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP
 
 == Description ==
 
-This plugin is like "dyno testing" your PHP front and MYSQL backend performance.
+This plugin is like "dyno testing" your PHP front and MYSQL backend servers.
 
 You can easily determine the CPU performance allocated for your PHP web and MySQL
 server with this plugin. This script does some simple calculations, string

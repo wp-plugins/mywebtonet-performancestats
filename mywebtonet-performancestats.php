@@ -68,12 +68,15 @@ function mywebtonetperftest_plugin_go() {
 	$phpversion=PHP_VERSION;
 	$phpos=PHP_OS;
 	$phpuname=php_uname();
+	$mysqlversion = $wpdb->get_var( "select version();" );
 	//		
-	echo "<br><br><table>\n";
-	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font></td></tr>\n";
-	echo "<tr><td>PHP host information : <font color='blue'>$phpuname</font></td></tr>\n";	
-	echo "<tr><td>PHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b></td></tr>\n"; 
-	echo "</table>\n";
+        echo "<br><br><table>\n";
+        echo "<tr><td>Server : $servername@<font color='blue'><b>."$serveraddr."</b></font></td></tr>\n";
+        echo "<tr><td>PHP host information : <font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
+        echo "<tr><td>PHP version : <font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
+        echo "<tr><td>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
+        echo "<tr><td>MySQL version : <font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
+        echo "</table>\n";
 
 	echo "<table>\n";
 	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
@@ -162,7 +165,7 @@ function mywebtonetperftest_plugin_go() {
 	<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
 	<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
 	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
-
+	<input type='hidden' name='mysqlversion' value='<? echo $mysqlversion ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	<font face="Verdana,Arial" size="2">	
 	<?
