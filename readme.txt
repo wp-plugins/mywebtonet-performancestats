@@ -19,9 +19,9 @@ server with this plugin. This script does some simple calculations, string
 manipulations and some simple CPU tests on your MySQL backend and displays them for you 
 to evaluate.
 
-There are many factors for a fast server, this plugin does not test eg. for
+There are many factors for a fast server, this plugin does not test e.g. for
 how many hits a second your provider allows to your web, filesystem
-performance is not tested either. Use it as a simple test and compare with
+performance is not tested either. Use it as a simple CPU test and compare with
 your friends statistics from their provider. 
 
 == Installation ==
