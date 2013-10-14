@@ -40,5 +40,11 @@ e.g.
 * This is the first stable release of this plugin
 
 = 1.01 =
-* Minor correction in the code in the submit results section. Now the load average is submitted as well.
+* Minor correction in submit results section.
+
+== Upgrade Notice ==
+
+= 1.01 =
+
+Minor correction in the code in the submit results section. Now the load average is submitted as well.
 
