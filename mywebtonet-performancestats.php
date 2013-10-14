@@ -67,8 +67,11 @@ function mywebtonetperftest_plugin_go() {
 	$serveraddr=$_SERVER['SERVER_ADDR'];
 	$phpversion=PHP_VERSION;
 	$phpos=PHP_OS;
+	$phpuname=php_uname();
 	//		
-	echo "\nServer : $servername@<font color='blue'><b>$serveraddr</b></font><br>\nPHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b><br><br>\n"; 
+	echo "<tr><td>\nServer : $servername@<font color='blue'><b>$serveraddr</b></font><br>\nPHP version : <b>".$phpversion."</B><br>\nPlatform : <b>".$phpos. "</b><br><br></td></tr>\n"; 
+	echo "<tr><td>PHP host information : $phpuname</td></tr>\n";
+
 	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
 	for ($i = 0; $i < $count; $i++) {
 		$time_start = microtime(true);
@@ -151,9 +154,10 @@ function mywebtonetperftest_plugin_go() {
 	<input type='hidden' name='ifelseresult' value='<? echo $testifelseresult ?>'>
 	<input type='hidden' name='mysqlresults' value='<? echo $mysqltemp ?>'>
 	<input type='hidden' name='phpmemorylimit' value='<? echo $memorylimit ?>'>
-<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
-<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
-<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
+	<input type='hidden' name='phpuname' value='<? echo $phpuname ?>'>
+	<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
+	<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
+	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
 
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	<font face="Verdana,Arial" size="2">	
