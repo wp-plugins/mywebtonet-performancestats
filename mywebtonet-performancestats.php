@@ -9,7 +9,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Description: A simple plugin that tests CPU performance on your web and MySQL server.
 Author: WebHosting A/S - MyWebToNet Ltd.
 Version: 1.0
-Author URI: http://www.mywebtonet.com / http://www.webhosting.dk
+Author URI: http://www.mywebtonet.com 
 */
 
 if ( !defined('ABSPATH') ) {
