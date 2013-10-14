@@ -4,15 +4,13 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: php, mysql, performance, testing, speed, dyno test
 Requires at least: 3.2.0
 Tested up to: 3.6.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP web and MySQL database backend.
+This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP web and MySQL database backend servers.
 
 == Description ==
-
-This plugin is like "dyno testing" your PHP front and MYSQL backend servers.
 
 You can easily determine the CPU performance allocated for your PHP web and MySQL
 server with this plugin. This script does some simple calculations, string
