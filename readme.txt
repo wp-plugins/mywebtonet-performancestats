@@ -8,10 +8,7 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin is a simple plugin that gives you information about the
-CPU performance of your PHP web and MySQL database backend.
-
-It's like dyno testing a car, except this is FREE :-)
+This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP web and MySQL database backend.
 
 == Description ==
 
