@@ -8,7 +8,7 @@ Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Description: A simple plugin that tests CPU performance on your web and MySQL server.
 Author: WebHosting A/S - MyWebToNet Ltd.
-Version: 1.0
+Version: 1.0.1
 Author URI: http://www.mywebtonet.com 
 */
 
