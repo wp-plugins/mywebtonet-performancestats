@@ -71,7 +71,7 @@ function mywebtonetperftest_plugin_go() {
 	$mysqlversion = $wpdb->get_var( "select version();" );
 	//		
         echo "<br><br><table>\n";
-        echo "<tr><td>Server : $servername@<font color='blue'><b>."$serveraddr."</b></font></td></tr>\n";
+        echo "<tr><td>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
         echo "<tr><td>PHP host information : <font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
         echo "<tr><td>PHP version : <font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
         echo "<tr><td>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
