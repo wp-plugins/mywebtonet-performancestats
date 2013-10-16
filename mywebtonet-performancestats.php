@@ -28,119 +28,61 @@ function myweb_init() {
 }                   
                      
 function mywebtonetperftest_plugin_menu() {
-	add_menu_page('mywebtonetperftest run', 'Performance test', 'manage_options', 'mywebtonetperftest', 'mywebtonetperftest_plugin_go');
+	add_menu_page('mywebtonetperftest', 'Performance Test', 'manage_options', 'mywebtonetperftest', 'mywebtonetperftest_plugin_all');
 }
 
-function mywebtonetperftest_plugin_go() {
-	?>
-	<body onLoad="init()">
-	<div id="loading" style="position:absolute; width:100%; text-align:center; top:100px;">
-	<br><br><br><br><br><img src="<?php echo MYWEB_URL.'pleasewait.gif'; ?>" alt="">
-	<center><br><br><font face='Verdana,Arial'>Please wait while we perform some tests!
-	</div><script>
-	var ld=(document.all);
-	var ns4=document.layers;
-	var ns6=document.getElementById&&!document.all;
-	var ie4=document.all;
-         if (ns4)
-         	ld=document.loading;
-                  else if (ns6)
-                  	ld=document.getElementById("loading").style;
-                         else if (ie4)
-                   ld=document.all.loading.style;
-             function init()
-                      {
-                       if(ns4){ld.visibility="hidden";}
-			else if (ns6||ie4) ld.display="none";
-		}
-	</script>
-	</center>
-	<?
-	flush();
-	
+function mywebtonetperftest_plugin_all($testtype) {
+
 	global $wpdb;
 	global $mysqltests;
-	echo $DB_HOST;
-	$count = count($mysqltests);
-	$totaltime = 0;
-	$servername=$_SERVER['SERVER_NAME'];
-	$serveraddr=$_SERVER['SERVER_ADDR'];
-	$phpversion=PHP_VERSION;
-	$phpos=PHP_OS;
-	$phpuname=php_uname();
+	global $MySQLtotaltime;
+	global $PHPtotaltime;
+	global $testmathresult;
+	global $teststringresult;
+	global $testloopresult;
+	global $testifelseresult;
+	global $mysqltemp;
+	//	
+	$servername	= $_SERVER['SERVER_NAME'];
+	$serveraddr	= $_SERVER['SERVER_ADDR'];
+	$phpversion	= PHP_VERSION;
+	$phpos		= PHP_OS;
+	$phpuname	= php_uname();
+	$memorylimit 	= ini_get("memory_limit");
 	$mysqlversion = $wpdb->get_var( "select version();" );
-	//		
-        echo "<br><br><table>\n";
+	//
+	// General information about server etc etc, we always show these		
+	//
+	echo "<br>\n";
+        echo "<table>\n";
         echo "<tr><td>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
         echo "<tr><td>PHP host information : <font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
         echo "<tr><td>PHP version : <font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
+	echo "<tr><td>PHP memory limit : <font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
         echo "<tr><td>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
         echo "<tr><td>MySQL version : <font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
         echo "</table>\n";
-
-	echo "<table>\n";
-	echo "<tr><td><b>MySQL database server test: </b></td></tr>\n";
-	for ($i = 0; $i < $count; $i++) {
-		$time_start = microtime(true);
-		$dotest = $wpdb->query( "$mysqltests[$i]" );	
-		$result = number_format(microtime(true) - $time_start, 3);	
-		$mysqlresults[]=$result;
-		$totaltime = $totaltime + $result;
-		echo "<tr><td>Time to perform: </td><td><font color='blue'><b>$mysqltests[$i]</b></font></td><td> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
-		flush();
-	}
-	$count = count($mysqlresults);
-	for ($i = 0; $i < $count; $i++) {
-		$mysqltemp = $mysqltemp.",".$mysqlresults[$i];
-	}	
-	echo "<tr><td>Total time</td><td><b>(all MySQL tests)</b></td><td> :<b>".sprintf("%6.2f",$totaltime)."</b> seconds</td></tr>\n";	
-	echo "<tr><td><br><B>PHP web server test:</b></td></tr>\n";
-	//
-	// Math test
-	//
-	$oldtime = $totaltime;
-	$totaltime =0;
-	$result = test_Math();
-	$testmathresult = $result;
-	$totaltime = $totaltime + $result;
-	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> Math test</b></font></td><td> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
-	//
-	$result = test_StringManipulation();
-	$teststringresult = $result;
-	$totaltime = $totaltime + $result;
-	
-	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> StringManipulation test</b></font></td><td> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
-	//
-	$result = test_Loops();
-	$testloopresult=$result;
-	$totaltime = $totaltime + $result;
-	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> test loop test</b></font></td><td> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
-	//
-	$result =  test_IfElse();
-	$testifelseresult =$result;
-	$totaltime = $totaltime + $result;
-	echo "<tr><td>Time to perform: </td><td><font color='blue'><b>  test IfElse</b></font></td><td> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
-
-	echo "<tr><td>Total time</td><td><b>(all PHP tests)</td><td> :<b>".sprintf("%6.2f",$totaltime)."</b> seconds</td></tr>\n";	
-	echo "<tr><td><br><b>All tests:</b></td></tr>\n";
-	echo "<tr><td>Total time</td><td><b>(all MySQL + PHP tests)</td><td> :<b>".sprintf("%6.2f",$totaltime+$oldtime)."</b> seconds</td></tr>\n";	
-	//
-
-	echo "</table><br>\n";	
-	$memorylimit = ini_get("memory_limit");
-	echo "<table width='250'>\n";
 	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		echo "<tr><td>Server load now:</td><td align='right'><b>Unable to fetch load as windows is used for webserver (incompatible)</b></td></tr>\n";
 	} else {
 		$load= sys_getloadavg();
-		echo "<tr><td>Server load now:</td><td align='right'><b>".sprintf("%6.2f",$load[0])."</b></td></tr>\n";
-		echo "<tr><td>Server 5 minutes ago:</td><td align='right'><b>".sprintf("%6.2f",$load[1])."</b></td></tr>\n";
-		echo "<tr><td>Server 15 minutes ago:</td><td align='right'><b>".sprintf("%6.2f",$load[2])."</b></td></tr>\n";	
+	        echo "<table width=250>\n";
+		echo "<tr><td>Server load now:</td><td align='left'><font color='blue'><b>".sprintf("%6.2f",$load[0])."</b></td></tr>\n";
+		echo "<tr><td>Server load avg. 5 minutes:</td><td align='left'><font color='blue'><b>".sprintf("%6.2f",$load[1])."</b></td></tr>\n";
+		echo "<tr><td>Server load avg. 15 minutes:</td><td align='left'><font color='blue'><b>".sprintf("%6.2f",$load[2])."</b></td></tr>\n";	
+	        echo "</table>\n";
 	}	
-	echo "<tr><td>PHP memory limit:</td><td align='right'><b>".$memorylimit."</b></td></tr>\n";
-	echo "</table>\n";	
+
+        doHeader();
+        doMySQL();
+        doPHPTests();
+        //
+	// Finish
+	// 
+	echo "<table width=70%>\n";
+	echo "<tr><td><b>All tests:</b></td></tr>\n";
+	echo "<tr><td width=20%>Total time</td><td width=60%><b>(all MySQL + PHP tests)</td><td width=20%> :<font color='blue'><b>".sprintf("%6.2f",$PHPtotaltime+$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 	$md5time = md5(time().$servername);
-	
 	?>
 	<center>
 	<br>
@@ -169,7 +111,10 @@ function mywebtonetperftest_plugin_go() {
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	<font face="Verdana,Arial" size="2">	
 	<?
-	
+	ShowFooter();
+}
+
+function ShowFooter() {
 	echo "<br><br>Some PHP 5.3, 5.4 and 5.5 examples below (<b>click on images below to view</b>):";
 	?>
 	<br><br>	
@@ -182,6 +127,89 @@ function mywebtonetperftest_plugin_go() {
 	<br><br>
 	Script made by <a href='http://www.mywebtonet.com' target=_blank><b>http://www.mywebtonet.com</b></a>&nbsp;&nbsp;<a href='http://www.webhosting.dk' target=_blank><b>http://www.webhosting.dk</b></a>
 <?			
+
+}
+
+function DoHeader() {
+	?>
+	<body onLoad="init()">
+	<div id="loading" style="position:absolute; width:100%; text-align:center; top:100px;">
+	<br><br><br><img src="<?php echo MYWEB_URL.'pleasewait.gif'; ?>" alt="">
+	<center><br><br><font face='Verdana,Arial'>Please wait while we perform some tests!
+	</div><script>
+	var ld=(document.all);
+	var ns4=document.layers;
+	var ns6=document.getElementById&&!document.all;
+	var ie4=document.all;
+         if (ns4)
+         	ld=document.loading;
+                  else if (ns6)
+                  	ld=document.getElementById("loading").style;
+                         else if (ie4)
+                   ld=document.all.loading.style;
+             function init()
+                      {
+                       if(ns4){ld.visibility="hidden";}
+			else if (ns6||ie4) ld.display="none";
+		}
+	</script>
+	</center>
+	<?
+	flush();
+}
+
+function DoPHPTests() {
+	global $PHPtotaltime;
+	global $testmathresult;
+	global $teststringresult;
+	global $testloopresult;
+	global $testifelseresult;
+
+        echo "<table width=70%>\n";
+	echo "<tr><td><B>PHP test:</b></td></tr>\n";
+	$PHPtotaltime =0;
+	$testmathresult = test_Math();
+	$PHPtotaltime = $PHPtotaltime + $testmathresult;
+	echo "<tr><td width=20%>Time to perform: </td><td width=60%><font color='blue'><b> Math test</b></font></td><td width=20%> :".sprintf("%6.2f",$testmathresult)." seconds</td></tr>\n";	
+	//
+	$teststringresult = test_StringManipulation();
+	$PHPtotaltime = $PHPtotaltime + $teststringresult;
+	
+	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> StringManipulation test</b></font></td><td> :".sprintf("%6.2f",$teststringresult)." seconds</td></tr>\n";	
+	//
+	$testloopresult = test_Loops();
+	$PHPtotaltime = $PHPtotaltime + $testloopresult;
+	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> test loop test</b></font></td><td> :".sprintf("%6.2f",$testloopresult)." seconds</td></tr>\n";	
+	//
+	$testifelseresult =  test_IfElse();
+	$PHPtotaltime = $PHPtotaltime + $testifelseresult;
+	echo "<tr><td>Time to perform: </td><td><font color='blue'><b>  test IfElse</b></font></td><td> :".sprintf("%6.2f",$testifelseresult)." seconds</td></tr>\n";	
+	echo "<tr><td>Total time</td><td><b>(all PHP tests)</td><td> :<font color='blue'><b>".sprintf("%6.2f",$PHPtotaltime)."</b></font> seconds</td></tr></table>\n";	
+
+}
+
+function DoMySQL() {
+	global $wpdb;
+	global $mysqltests;
+	global $MySQLtotaltime;
+	global $mysqltemp;
+	$count = count($mysqltests);
+	echo "<table width=70%>\n";
+	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
+	for ($i = 0; $i < $count; $i++) {
+		$time_start = microtime(true);
+		$dotest = $wpdb->query( "$mysqltests[$i]" );	
+		$result = number_format(microtime(true) - $time_start, 3);	
+		$mysqlresults[]=$result;
+		$MySQLtotaltime = $MySQLtotaltime + $result;
+		echo "<tr><td wdith=20%>Time to perform: </td><td width=60%><font color='blue'><b>$mysqltests[$i]</b></font></td><td width=20%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
+		flush();
+	}
+	$count = count($mysqlresults);
+	for ($i = 0; $i < $count; $i++) {
+		$mysqltemp = $mysqltemp.",".$mysqlresults[$i];
+	}	
+	echo "<tr><td>Total time</td><td><b>(all MySQL tests)</b></td><td> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 
 }
 
