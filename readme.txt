@@ -15,13 +15,16 @@ This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP
 You can easily determine the CPU performance allocated for your PHP web and MySQL
 backend servers with this plugin. The plugin does various calculations and string
 manipulations on your PHP webserver + some simple CPU tests on your MySQL backend 
-server. After the test has run the result will be displayed for you to evaluate. 
-Generally speaking, the  faster this plugin runs the faster your website will run. 
+server. After the test has run, the result will be displayed for you to evaluate. 
+Generally speaking, the  faster this plugin runs, the faster your website will run. 
 
-There are many factors for a fast server, this plugin does not test e.g. for
-how many hits a second your provider allows to your web, filesystem
-performance is not tested either. Use it as a simple performance test on your CPU 
-and compare with results from other providers. 
+There are many factors that will determine how fast your website will run. This 
+plugin does not test e.g. for how many hits a second your provider allows to your 
+web, filesystem performance is not tested either. Use it as a simple performance 
+test on how much CPU performance your provider has allocated to your website and 
+compare with results from other providers. 
+
+Share with your friends and start a competition :-)
 
 == Installation ==
 

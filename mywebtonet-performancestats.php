@@ -79,7 +79,7 @@ function mywebtonetperftest_plugin_go() {
         echo "</table>\n";
 
 	echo "<table>\n";
-	echo "<tr><td><b>MySQL test: </b></td></tr>\n";
+	echo "<tr><td><b>MySQL database server test: </b></td></tr>\n";
 	for ($i = 0; $i < $count; $i++) {
 		$time_start = microtime(true);
 		$dotest = $wpdb->query( "$mysqltests[$i]" );	
@@ -94,7 +94,7 @@ function mywebtonetperftest_plugin_go() {
 		$mysqltemp = $mysqltemp.",".$mysqlresults[$i];
 	}	
 	echo "<tr><td>Total time</td><td><b>(all MySQL tests)</b></td><td> :<b>".sprintf("%6.2f",$totaltime)."</b> seconds</td></tr>\n";	
-	echo "<tr><td><br><B>PHP test:</b></td></tr>\n";
+	echo "<tr><td><br><B>PHP web server test:</b></td></tr>\n";
 	//
 	// Math test
 	//
@@ -146,7 +146,7 @@ function mywebtonetperftest_plugin_go() {
 	<br>
 	<table width='90%' border=3>
 	<tr><td align='left'>
-	By submitting results we can evaluate figures and compare one test to the other. No tests will ever get disclosed. If you do not want this information to be submitted, please do <b>not</B> press the submit button.
+	By submitting results we can evaluate figures and compare one test to the other. No tests will ever get disclosed. If you <b>do not want</b> this information to be submitted, please do <b>not</B> press the submit button.
 	<br><br>
 	</td></tr></table>
 	<FORM name="myform" METHOD="POST" ACTION="http://gather.webhosting.dk/cgi-bin/mywebtonet-performancestatsresults.pl" accept-charset="ISO-8859-1" target=_blank>
