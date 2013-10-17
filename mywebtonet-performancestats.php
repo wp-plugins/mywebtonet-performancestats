@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.1
+ * @version 1.0.2
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Description: A simple plugin that tests CPU performance on your web and MySQL server.
 Author: WebHosting A/S - MyWebToNet Ltd.
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -31,7 +31,7 @@ function mywebtonetperftest_plugin_menu() {
 	add_menu_page('mywebtonetperftest', 'Performance Test', 'manage_options', 'mywebtonetperftest', 'mywebtonetperftest_plugin_all');
 }
 
-function mywebtonetperftest_plugin_all($testtype) {
+function mywebtonetperftest_plugin_all() {
 
 	global $wpdb;
 	global $mysqltests;
@@ -49,16 +49,18 @@ function mywebtonetperftest_plugin_all($testtype) {
 	$phpos		= PHP_OS;
 	$phpuname	= php_uname();
 	$memorylimit 	= ini_get("memory_limit");
+	$postmaxsize 	= ini_get("post_max_size");
 	$mysqlversion = $wpdb->get_var( "select version();" );
 	//
 	// General information about server etc etc, we always show these		
 	//
 	echo "<br>\n";
+	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center>\n";
         echo "<table>\n";
         echo "<tr><td>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
         echo "<tr><td>PHP host information : <font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
         echo "<tr><td>PHP version : <font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
-	echo "<tr><td>PHP memory limit : <font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
+	echo "<tr><td>PHP memory limit / Post max size: <font color='blue'><b>".$memorylimit." / ".$postmaxsize."</b></font></td></tr>\n";
         echo "<tr><td>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
         echo "<tr><td>MySQL version : <font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
         echo "</table>\n";
@@ -103,6 +105,7 @@ function mywebtonetperftest_plugin_all($testtype) {
 	<input type='hidden' name='ifelseresult' value='<? echo $testifelseresult ?>'>
 	<input type='hidden' name='mysqlresults' value='<? echo $mysqltemp ?>'>
 	<input type='hidden' name='phpmemorylimit' value='<? echo $memorylimit ?>'>
+	<input type='hidden' name='postmaxsize' value='<? echo $postmaxsize ?>'>
 	<input type='hidden' name='phpuname' value='<? echo $phpuname ?>'>
 	<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
 	<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
@@ -115,7 +118,7 @@ function mywebtonetperftest_plugin_all($testtype) {
 }
 
 function ShowFooter() {
-	echo "<br><br>Some PHP 5.3, 5.4 and 5.5 examples below (<b>click on images below to view</b>):";
+	echo "<a name='footer'><br><br>Some PHP 5.3, 5.4 and 5.5 examples below (<b>click on images below to view</b>):";
 	?>
 	<br><br>	
 	<a href="<?php echo MYWEB_URL; ?>perftestphp53.png" target=_blank><img src="<?php echo MYWEB_URL; ?>perftestphp53.png" width=326 height=228 alt="PHP 5.3 test result" border=0></a>

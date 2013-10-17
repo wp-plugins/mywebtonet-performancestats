@@ -50,3 +50,6 @@ e.g.
 
 Minor correction in the code in the submit results section. Now the load average is submitted as well.
 
+= 1.0.2 =
+
+Minor layout changes, max post size information now included.
