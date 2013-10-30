@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.2
+ * @version 1.0.3
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Description: A simple plugin that tests CPU performance on your web and MySQL server.
 Author: WebHosting A/S - MyWebToNet Ltd.
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -31,6 +31,7 @@ function mywebtonetperftest_plugin_menu() {
 	add_menu_page('mywebtonetperftest', 'Performance Test', 'manage_options', 'mywebtonetperftest', 'mywebtonetperftest_plugin_all');
 }
 
+
 function mywebtonetperftest_plugin_all() {
 
 	global $wpdb;
@@ -42,6 +43,7 @@ function mywebtonetperftest_plugin_all() {
 	global $testloopresult;
 	global $testifelseresult;
 	global $mysqltemp;
+	global $mysqlresults;
 	//	
 	$servername	= $_SERVER['SERVER_NAME'];
 	$serveraddr	= $_SERVER['SERVER_ADDR'];
@@ -88,11 +90,11 @@ function mywebtonetperftest_plugin_all() {
 	?>
 	<center>
 	<br>
-	<table width='90%' border=3>
+	<table width='90%' border=0 bgcolor='fcfcfc' cellpadding=0 cellspacing=6 style='border-width: 1px; border-color:#cccccc; border-style: solid;'>
 	<tr><td align='left'>
 	By submitting results we can evaluate figures and compare one test to the other. No tests will ever get disclosed. If you <b>do not want</b> this information to be submitted, please do <b>not</B> press the submit button.
-	<br><br>
 	</td></tr></table>
+	<br><br>
 	<FORM name="myform" METHOD="POST" ACTION="http://gather.webhosting.dk/cgi-bin/mywebtonet-performancestatsresults.pl" accept-charset="ISO-8859-1" target=_blank>
 	<input type='hidden' name='md5time' value='<? echo $md5time ?>'>
 	<input type='hidden' name='servername' value='<? echo $servername ?>'>
@@ -112,13 +114,30 @@ function mywebtonetperftest_plugin_all() {
 	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
 	<input type='hidden' name='mysqlversion' value='<? echo $mysqlversion ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
+	</form>
 	<font face="Verdana,Arial" size="2">	
+	<table>
+		<tr>
+			<td>
+			<?
+			$data = array("Mysql 1" => $mysqlresults[0],"Mysql 2" => $mysqlresults[1],"Mysql 3" => $mysqlresults[2]);	
+			?>
+			<img src="<?php echo MYWEB_URL; ?>showgraph.php?header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($data)); ?>" />
+			</td>
+			<td>
+			<?
+			$data = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
+			?>
+			<img src="<?php echo MYWEB_URL; ?>showgraph.php?header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($data)); ?>" />
+			</td>
+		</tr>
+	</table>		
 	<?
 	ShowFooter();
 }
 
 function ShowFooter() {
-	echo "<a name='footer'><br><br>Some PHP 5.3, 5.4 and 5.5 examples below (<b>click on images below to view</b>):";
+	echo "<a name='footer'>Some PHP 5.3, 5.4 and 5.5 examples below (<b>click on images below to view</b>):";
 	?>
 	<br><br>	
 	<a href="<?php echo MYWEB_URL; ?>perftestphp53.png" target=_blank><img src="<?php echo MYWEB_URL; ?>perftestphp53.png" width=326 height=228 alt="PHP 5.3 test result" border=0></a>
@@ -182,7 +201,7 @@ function DoPHPTests() {
 	//
 	$testloopresult = test_Loops();
 	$PHPtotaltime = $PHPtotaltime + $testloopresult;
-	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> test loop test</b></font></td><td> :".sprintf("%6.2f",$testloopresult)." seconds</td></tr>\n";	
+	echo "<tr><td>Time to perform: </td><td><font color='blue'><b> test Loop test</b></font></td><td> :".sprintf("%6.2f",$testloopresult)." seconds</td></tr>\n";	
 	//
 	$testifelseresult =  test_IfElse();
 	$PHPtotaltime = $PHPtotaltime + $testifelseresult;
@@ -196,6 +215,7 @@ function DoMySQL() {
 	global $mysqltests;
 	global $MySQLtotaltime;
 	global $mysqltemp;
+	global $mysqlresults;
 	$count = count($mysqltests);
 	echo "<table width=70%>\n";
 	echo "<tr><td><b>MySQL test: </b></td></tr>\n";

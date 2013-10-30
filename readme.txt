@@ -3,8 +3,8 @@ Contributors: mywebtonet
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: php, mysql, performance, testing, speed, dyno test
 Requires at least: 3.2.0
-Tested up to: 3.6.1
-Stable tag: 1.0.2
+Tested up to: 3.7.1
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,15 +44,21 @@ e.g.
 = 1.0.1 =
 * Minor correction in the submit results section.
 
-= 1.0.2 =
-Minor layout changes, max post size information now included.
+= 1.0.3 =
+* Now with graphs :-) Thanks to http://www.ebrueggeman.com
 
 == Upgrade Notice ==
 
 = 1.0.1 =
-
 Minor correction in the code in the submit results section. Now the load average is submitted as well.
 
 = 1.0.2 =
-
 Minor layout changes, max post size information now included.
+
+= 1.0.3 =
+Now with graphs :-) Thanks to
+
+http://www.ebrueggeman.com
+
+
+
