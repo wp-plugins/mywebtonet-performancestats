@@ -94,7 +94,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>PHP total time</td><td valign='top' align='left'><? echo sprintf("<font color='blue'><b>%10.2f</b>",$getdata->phpresult);?></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>MySQL statistics</b></td></tr>
-	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><? echo $getdata->mysqlserver;?></td>
+	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><? echo $getdata->mysqlversion;?></td>
 	<tr><td valign='top' align='left'>MySQL 1</td><td valign='top' align='left'><? echo $getdata->mysql1;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL 2</td><td valign='top' align='left'><? echo $getdata->mysql2;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><? echo $getdata->mysql3;?></td></tr>
@@ -181,8 +181,16 @@ function mywebtonetperftest_createtable() {
 	   KEY `servername` (`servername`)
 	) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 	 ");	
+}
+function mywebtonetperftest_cleandb() {
+	global $wpdb;
+	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
+	$createtable = $wpdb->query( "delete from `$tableprefix` where deleteable=1");
+	echo "<center><H4>Database is now cleaned</h4>";
+	exit;
 
 }
+
 
 function mywebtonetperftest_slow() {
 	mywebtonetperftest_showfromdb("slow");
@@ -201,6 +209,7 @@ function mywebtonetperftest_plugin_menu() {
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show fastest time','myweb-menu'),__('Show fastest time','myweb-menu'), 'manage_options', 'sub-page2', 'mywebtonetperftest_fast');
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show slowest time','myweb-menu'),__('Show slowest time','myweb-menu'), 'manage_options', 'sub-page3', 'mywebtonetperftest_slow');
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show list of tests','myweb-menu'),__('Show list of tests','myweb-menu'), 'manage_options', 'sub-page4', 'mywebtonetperftest_showlist');
+  	add_submenu_page('mywebtonetperftest_plugin_all', __('Delete all results','myweb-menu'),__('Delete all results','myweb-menu'), 'manage_options', 'sub-page5', 'mywebtonetperftest_cleandb');
 }
 
 
