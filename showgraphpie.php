@@ -9,7 +9,7 @@ $data   = unserialize(urldecode(stripslashes($_GET['mydata'])));
 if ($showsmall) {
   $graph=new PHPGraphLibPie(300,200);
 } else {
-  $graph=new PHPGraphLibPie(450,300);
+  $graph=new PHPGraphLibPie(500,300);
 
 }
 

@@ -39,18 +39,6 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<center>
 	<br><br>
 	<?
-	if ($showtype == "whphp53") {
-		$headertext = "MyWebToNet WebHosting PHP 5.3";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=0 and phpversion='5.3' group by uniqid order by mysqlresult asc limit 1;");
-	}	
-	if ($showtype == "whphp54") {
-		$headertext = "MyWebToNet WebHosting PHP 5.4";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=0 and phpversion='5.4' group by uniqid order by mysqlresult asc limit 1;");
-	}	
-	if ($showtype == "whphp55") {
-		$headertext = "MyWebToNet WebHosting PHP 5.5";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=0 and phpversion='5.5' group by uniqid order by mysqlresult asc limit 1;");
-	}	
 	if ($showtype == "fast") {
 		$headertext = "Best time";
 		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
@@ -106,6 +94,9 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<?
 		$datamysql = array("MySQL 1" => $getdata->mysql1,"MySQL 2" => $getdata->mysql2,"MySQL 3" => $getdata->mysql3);	
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
+		$ourdatamysql = array("MySQL 1" => 3.22,"MySQL 2" => 1.06,"MySQL 3" => 0.44);	
+		$ourdataphp = array("PHP 1" => 0.28,"PHP 2" => 0.59,"PHP 3" => 0.24,"PHP 4" => 0.29);	
+
 	?>		
 		<td valign='top' align='left'>
 			<table>
@@ -115,8 +106,8 @@ function mywebtonetperftest_showfromdb($showtype) {
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
@@ -309,24 +300,23 @@ function mywebtonetperftest_plugin_all() {
 	<?
 		$datamysql = array("MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
+		$ourdatamysql = array("MySQL 1" => 3.22,"MySQL 2" => 1.06,"MySQL 3" => 0.44);	
+		$ourdataphp = array("PHP 1" => 0.28,"PHP 2" => 0.59,"PHP 3" => 0.24,"PHP 4" => 0.29);	
 
 	?>
-		<tr>
-			<td valign='top'>
-			<img src="<?php echo MYWEB_URL; ?>showgraphpie.php?datavalues=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" />
-			</td>
-			<td valign='top'>
-			<img src="<?php echo MYWEB_URL; ?>showgraphpie.php?datavalues=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td valign='top'>
-			<img src="<?php echo MYWEB_URL; ?>showgraph.php?datavalues=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" />
-			</td>
-			<td valign='top'>
-			<img src="<?php echo MYWEB_URL; ?>showgraph.php?datavalues=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" />
-			</td>
-		</tr>
+		<td valign='top' align='left'>
+			<table>
+			<tr>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<br>
+			</tr>
+			<tr>	
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			</tr>	
+			</table>		
+		</td>
 	</table><br>		
 	<?
 	ShowFooter();
