@@ -15,11 +15,11 @@ if ($showsmall) {
 $graph->addData($data);
 $graph->addData($data2);
 //$graph->setDataValues(true);
-$graph->setLegend(true);
-$graph->setLegendTitle('Your data','MyWebToNet');
+//$graph->setLegend(true);
+//$graph->setLegendTitle('Your data','MyWebToNet');
 $graph->setXValuesHorizontal(TRUE);
 $graph->setTitle($header);
-$graph->setTitleLocation('left');
+//$graph->setTitleLocation('left');
 $graph->setTextColor('blue');
 $graph->setBarColor('blue', 'green');
 //$graph->setLegend(TRUE);

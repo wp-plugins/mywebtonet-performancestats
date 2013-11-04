@@ -12,7 +12,16 @@ Version: 1.0.4
 Author URI: http://www.mywebtonet.com 
 */
 
-$showtest	= $_GET["showtest"];
+// $showtest	= $_GET["showtest"];
+
+
+$ourdatamysql53 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
+$ourdatamysql54 = array("MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
+$ourdatamysql55 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
+$ourdataphp53 = array("PHP 1" => 1.45,"PHP 2" => 0.70,"PHP 3" => 0.40,"PHP 4" => 0.66);	
+$ourdataphp54 = array("PHP 1" => 0.29,"PHP 2" => 0.64,"PHP 3" => 0.29,"PHP 4" => 0.37);	
+$ourdataphp55 = array("PHP 1" => 0.28,"PHP 2" => 0.61,"PHP 3" => 0.24,"PHP 4" => 0.31);	
+
 
 if ( !defined('ABSPATH') ) {
 	echo "<center>You cant do this";
@@ -33,11 +42,14 @@ function myweb_init() {
                      
 function mywebtonetperftest_showfromdb($showtype) {
 	global $wpdb;
+	global $ourdatamysql55;
+	global $ourdataphp55;
+
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	mywebtonetperftest_createtable();
 	?>
 	<center>
-	<br><br>
+	
 	<?
 	if ($showtype == "fast") {
 		$headertext = "Best time";
@@ -56,7 +68,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	}
 
 	?>
-	<h3><? echo $headertext?></h3>
+	<br><br><h3><? echo $headertext?></h3>
 	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
@@ -94,20 +106,18 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<?
 		$datamysql = array("MySQL 1" => $getdata->mysql1,"MySQL 2" => $getdata->mysql2,"MySQL 3" => $getdata->mysql3);	
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
-		$ourdatamysql = array("MySQL 1" => 3.22,"MySQL 2" => 1.06,"MySQL 3" => 0.44);	
-		$ourdataphp = array("PHP 1" => 0.28,"PHP 2" => 0.59,"PHP 3" => 0.24,"PHP 4" => 0.29);	
 
 	?>		
 		<td valign='top' align='left'>
 			<table>
 			<tr>
 			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
@@ -119,13 +129,53 @@ function mywebtonetperftest_showfromdb($showtype) {
 
 function mywebtonetperftest_showlist() {
 	global $wpdb;
+	global $ourdatamysql53;
+	global $ourdatamysql54;
+	global $ourdatamysql55;
+	global $ourdataphp53;
+	global $ourdataphp54;
+	global $ourdataphp55;
 	mywebtonetperftest_createtable();
+	$mysqltotal53 = sprintf("%10.2f",$ourdatamysql53["MySQL 1"] + $ourdatamysql53["MySQL 2"] + $ourdatamysql53["MySQL 3"]);
+	$mysqltotal54 = sprintf("%10.2f",$ourdatamysql54["MySQL 1"] + $ourdatamysql54["MySQL 2"] + $ourdatamysql54["MySQL 3"]);
+	$mysqltotal55 = sprintf("%10.2f",$ourdatamysql55["MySQL 1"] + $ourdatamysql55["MySQL 2"] + $ourdatamysql55["MySQL 3"]);
+	$phptotal53 = sprintf("%10.2f",$ourdataphp53["PHP 1"] + $ourdataphp53["PHP 2"] + $ourdataphp53["PHP 3"]  + $ourdataphp53["PHP 4"]);
+	$phptotal54 = sprintf("%10.2f",$ourdataphp54["PHP 1"] + $ourdataphp54["PHP 2"] + $ourdataphp54["PHP 3"]  + $ourdataphp54["PHP 4"]);
+	$phptotal55 = sprintf("%10.2f",$ourdataphp55["PHP 1"] + $ourdataphp55["PHP 2"] + $ourdataphp55["PHP 3"]  + $ourdataphp55["PHP 4"]);
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
+	$totaltime53 = sprintf("%10.2f",$mysqltotal53+$phptotal53);
+	$totaltime54 = sprintf("%10.2f",$mysqltotal54+$phptotal54);
+	$totaltime55 = sprintf("%10.2f",$mysqltotal55+$phptotal55);
 	?>
 	<br><br>
-	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
+	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td></tr>	
-	<?	
+	<?
+	echo "<tr><td>Sunday 3rd November 2013 23:45:11</td>
+		<td>MyWebToNet PHP 5.3 server</td>
+		<td>81.19.232.65</td><td>5.3.27</td>
+		<td>5.6.14</td>
+		<td>$mysqltotal53</td>
+		<td>$phptotal53</td>
+		<td><font color='blue'><b>$totaltime53</b></font></td>
+		</tr>";
+	echo "<tr><td>Sunday 3rd November 2013 23:44:21</td>
+		<td>MyWebToNet PHP 5.4 server</td>
+		<td>81.19.232.55</td><td>5.4.21</td>
+		<td>5.6.14</td>
+		<td>$mysqltotal54</td>
+		<td>$phptotal54</td>
+		<td><font color='blue'><b>$totaltime54</b></font></td>
+		</tr>";
+	echo "<tr><td>Sunday 3rd November 2013 23:48:33</td>
+		<td>MyWebToNet PHP 5.5 server</td>
+		<td>81.7.161.141</td><td>5.5.5</td>
+		<td>5.6.14</td>
+		<td>$mysqltotal55</td>
+		<td>$phptotal55</td>
+		<td><font color='blue'><b>$totaltime55</b></font></td>
+		</tr>";
+	
 	
 	$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix group by uniqid order by dt asc;");
 	foreach ( $getdata as $getdata ) {
@@ -215,6 +265,8 @@ function mywebtonetperftest_plugin_all() {
 	global $testifelseresult;
 	global $mysqltemp;
 	global $mysqlresults;
+	global $ourdatamysql55;
+	global $ourdataphp55;
 	//	
 	$servername	= $_SERVER['SERVER_NAME'];
 	$serveraddr	= $_SERVER['SERVER_ADDR'];
@@ -300,20 +352,18 @@ function mywebtonetperftest_plugin_all() {
 	<?
 		$datamysql = array("MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
-		$ourdatamysql = array("MySQL 1" => 3.22,"MySQL 2" => 1.06,"MySQL 3" => 0.44);	
-		$ourdataphp = array("PHP 1" => 0.28,"PHP 2" => 0.59,"PHP 3" => 0.24,"PHP 4" => 0.29);	
 
 	?>
 		<td valign='top' align='left'>
 			<table>
 			<tr>
 			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
