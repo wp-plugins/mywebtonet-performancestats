@@ -116,8 +116,8 @@ function mywebtonetperftest_showfromdb($showtype) {
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
@@ -362,8 +362,8 @@ function mywebtonetperftest_plugin_all() {
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Your data is the blue graph")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
