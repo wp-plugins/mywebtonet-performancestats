@@ -12,16 +12,12 @@ Version: 1.0.4
 Author URI: http://www.mywebtonet.com 
 */
 
-// $showtest	= $_GET["showtest"];
-
-
 $ourdatamysql53 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
 $ourdatamysql54 = array("MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
 $ourdatamysql55 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
 $ourdataphp53 = array("PHP 1" => 1.45,"PHP 2" => 0.70,"PHP 3" => 0.40,"PHP 4" => 0.66);	
 $ourdataphp54 = array("PHP 1" => 0.29,"PHP 2" => 0.64,"PHP 3" => 0.29,"PHP 4" => 0.37);	
 $ourdataphp55 = array("PHP 1" => 0.28,"PHP 2" => 0.61,"PHP 3" => 0.24,"PHP 4" => 0.31);	
-
 
 if ( !defined('ABSPATH') ) {
 	echo "<center>You cant do this";
@@ -92,6 +88,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>PHP test 3</td><td valign='top' align='left'><? echo $getdata->php3;?></td></tr>
 	<tr><td valign='top' align='left'>PHP test 4</td><td valign='top' align='left'><? echo $getdata->php4;?></td></tr>
 	<tr><td valign='top' align='left'>PHP total time</td><td valign='top' align='left'><? echo sprintf("<font color='blue'><b>%10.2f</b>",$getdata->phpresult);?></td></tr>
+	<tr><td valign='top' align='left'>PHP performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/($getdata->phpresult));?></b></font></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>MySQL statistics</b></td></tr>
 	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><? echo $getdata->mysqlversion;?></td>
@@ -99,6 +96,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>MySQL 2</td><td valign='top' align='left'><? echo $getdata->mysql2;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><? echo $getdata->mysql3;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL total time</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->mysqlresult;?></b></td></tr>
+	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Summary</b></td></tr>
 	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
@@ -146,10 +144,20 @@ function mywebtonetperftest_showlist() {
 	$totaltime53 = sprintf("%10.2f",$mysqltotal53+$phptotal53);
 	$totaltime54 = sprintf("%10.2f",$mysqltotal54+$phptotal54);
 	$totaltime55 = sprintf("%10.2f",$mysqltotal55+$phptotal55);
+	$phpperformanceindex53= sprintf("%10.0f",10000/($phptotal53));
+	$phpperformanceindex54= sprintf("%10.0f",10000/($phptotal54));
+	$phpperformanceindex55= sprintf("%10.0f",10000/($phptotal55));
+	$mysqlperformanceindex53= sprintf("%10.0f",10000/($mysqltotal53/3));
+	$mysqlperformanceindex54= sprintf("%10.0f",10000/($mysqltotal54/3));
+	$mysqlperformanceindex55= sprintf("%10.0f",10000/($mysqltotal55/3));
+	
 	?>
-	<br><br>
+	<br>
+	P.I = PHP performance Index<br>
+	M.I = MySQL performance Index<br>
+	<br>
 	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
-	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td></tr>	
+	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
 	<?
 	echo "<tr><td>Sunday 3rd November 2013 23:45:11</td>
 		<td>MyWebToNet PHP 5.3 server</td>
@@ -158,6 +166,8 @@ function mywebtonetperftest_showlist() {
 		<td>$mysqltotal53</td>
 		<td>$phptotal53</td>
 		<td><font color='blue'><b>$totaltime53</b></font></td>
+		<td><font color='blue'><b>$phpperformanceindex53</b></font></td>
+		<td><font color='blue'><b>$mysqlperformanceindex53</b></font></td>
 		</tr>";
 	echo "<tr><td>Sunday 3rd November 2013 23:44:21</td>
 		<td>MyWebToNet PHP 5.4 server</td>
@@ -166,6 +176,8 @@ function mywebtonetperftest_showlist() {
 		<td>$mysqltotal54</td>
 		<td>$phptotal54</td>
 		<td><font color='blue'><b>$totaltime54</b></font></td>
+		<td><font color='blue'><b>$phpperformanceindex54</b></font></td>
+		<td><font color='blue'><b>$mysqlperformanceindex54</b></font></td>
 		</tr>";
 	echo "<tr><td>Sunday 3rd November 2013 23:48:33</td>
 		<td>MyWebToNet PHP 5.5 server</td>
@@ -174,17 +186,21 @@ function mywebtonetperftest_showlist() {
 		<td>$mysqltotal55</td>
 		<td>$phptotal55</td>
 		<td><font color='blue'><b>$totaltime55</b></font></td>
+		<td><font color='blue'><b>$phpperformanceindex55</b></font></td>
+		<td><font color='blue'><b>$mysqlperformanceindex55</b></font></td>
 		</tr>";
 	
 	
 	$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix group by uniqid order by dt asc;");
 	foreach ( $getdata as $getdata ) {
-		echo "<tr><td valign='top'>".$getdata->tt."</td><td valign='top'><a href='http://".$getdata->servername."' target=_blank>".$getdata->servername."</a></td><td valign='top'>".$getdata->serveraddr."</td><td valign='top'>".$getdata->phpversion."</td><td valign='top'>".$getdata->mysqlversion."</td><td valign='top'>".$getdata->mysqlresult."</td><td valign='top'>".$getdata->phpresult."</td><td valign='top'><font color='blue'><b>";
+		echo "<tr><td valign='top'>".$getdata->tt."</td>
+		<td valign='top'><a href='http://".$getdata->servername."' target=_blank>".$getdata->servername."</a></td>
+		<td valign='top'>".$getdata->serveraddr."</td><td valign='top'>".$getdata->phpversion."</td>
+		<td valign='top'>".$getdata->mysqlversion."</td><td valign='top'>".$getdata->mysqlresult."</td>
+		<td valign='top'>".$getdata->phpresult."</td><td valign='top'><font color='blue'><b>";
 		echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult); 
-		?>
-		</b></font></td>
-		</tr>
-	<?	
+		echo "</td><td valign='top'><font color='blue'><b>"; echo sprintf("%10.0f",10000/($getdata->phpresult)); echo "</b></font></td>";
+		echo "<td valign='top'><font color='blue'><b>"; echo sprintf("%10.0f",10000/($getdata->mysqlresult/3)); echo "</b></font></td></tr>";
 	}
 	?>
 	</table>	
@@ -223,6 +239,7 @@ function mywebtonetperftest_createtable() {
 	) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 	 ");	
 }
+
 function mywebtonetperftest_cleandb() {
 	global $wpdb;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
@@ -231,7 +248,6 @@ function mywebtonetperftest_cleandb() {
 	exit;
 
 }
-
 
 function mywebtonetperftest_slow() {
 	mywebtonetperftest_showfromdb("slow");
@@ -276,9 +292,6 @@ function mywebtonetperftest_plugin_all() {
 	$memorylimit 	= ini_get("memory_limit");
 	$postmaxsize 	= ini_get("post_max_size");
 	$mysqlversion = $wpdb->get_var( "select version();" );
-	//
-	// we need to make a table..
-	//
 	//
 	// General information about server etc etc, we always show these		
 	//
@@ -352,7 +365,6 @@ function mywebtonetperftest_plugin_all() {
 	<?
 		$datamysql = array("MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
-
 	?>
 		<td valign='top' align='left'>
 			<table>
@@ -453,9 +465,6 @@ function DoMySQL() {
 	global $mysqltemp;
 	global $mysqlresults;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
-
-
-
 	$count = count($mysqltests);
 
 	echo "<table width=70%>\n";
