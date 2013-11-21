@@ -8,7 +8,7 @@ Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin is a simple plugin that "dyno tests" the CPU performance of your PHP web and MySQL database backend servers.
+With this plugin you can "dyno tests" the CPU performance of your PHP webserver and MySQL database backend server.
 
 == Description ==
 
@@ -21,8 +21,8 @@ Generally speaking, the  faster this plugin runs, the faster your website will r
 There are many factors that will determine how fast your website will run. This 
 plugin does not test e.g. for how many hits a second your provider allows to your 
 web, filesystem performance is not tested either. Use it as a simple performance 
-test on how fast a CPU your provider has allocated to your webserver and database 
-backend.
+test on how fast a CPU your provider has allocated to your webserver and your MySQL
+database backend.
 
 Share with your friends, let's start a competition :-)
 
