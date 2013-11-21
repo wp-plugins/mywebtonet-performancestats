@@ -21,10 +21,10 @@ Generally speaking, the  faster this plugin runs, the faster your website will r
 There are many factors that will determine how fast your website will run. This 
 plugin does not test e.g. for how many hits a second your provider allows to your 
 web, filesystem performance is not tested either. Use it as a simple performance 
-test on how much CPU performance your provider has allocated to your website and 
-compare with results from other providers. 
+test on how fast a CPU your provider has allocated to your webserver and database 
+backend.
 
-Share with your friends and start a competition :-)
+Share with your friends, let's start a competition :-)
 
 == Installation ==
 
