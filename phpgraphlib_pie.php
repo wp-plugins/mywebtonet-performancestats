@@ -1,4 +1,4 @@
-<?
+<?php
 ///////////////////////////////////////////////////////////
 //PHPGraphLib -  PHP Graphing Library v2.31 - Pie Chart Extension
 //Author: Elliott Brueggeman

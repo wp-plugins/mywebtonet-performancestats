@@ -1,4 +1,4 @@
-<?
+<?php
 error_reporting(0);
 include("phpgraphlib.php");
 include("phpgraphlib_pie.php");
