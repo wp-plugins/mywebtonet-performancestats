@@ -12,6 +12,7 @@ Version: 1.0.5
 Author URI: http://www.mywebtonet.com 
 */
 
+$mysqlquerydata = str_repeat ("X" , 1000 );
 $ourdatamysql53 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
 $ourdatamysql54 = array("MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
 $ourdatamysql55 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
@@ -316,9 +317,10 @@ function mywebtonetperftest_plugin_all() {
 	        echo "</table>\n";
 	}	
 
-        doHeader();
-        doMySQL();
-        doPHPTests();
+        DoHeader();
+	DoQueryTest();
+        DoMySQL();
+        DoPHPTests();
         //
         // Store results in DB
 	//
@@ -467,8 +469,6 @@ function DoMySQL() {
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$count = count($mysqltests);
 
-	echo "<table width=70%>\n";
-	echo "<tr><td valign='top'><b>MySQL test: </b></td></tr>\n";
 	for ($i = 0; $i < $count; $i++) {
 		$time_start = microtime(true);
 		$dotest = $wpdb->query( "$mysqltests[$i]" );	
@@ -485,6 +485,30 @@ function DoMySQL() {
 	echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 
 }
+
+function DoQuerytest() {
+	global $wpdb;
+	global $mysqlquerydata;
+	global $MySQLtotaltime;
+	$tableprefix = $wpdb->prefix."mywebtonetqtest";
+	$createtable = $wpdb->query("CREATE TABLE if not exists `$tableprefix` (`dummydata` text NOT NULL DEFAULT '')");
+	$time_start = microtime(true);
+	$count = 200;
+	echo "<table width=70%>\n";
+	echo "<tr><td valign='top'><b>MySQL test: </b></td></tr>\n";
+	for ($i = 0; $i < $count; $i++) {
+		$dotest = $wpdb->query( "insert into $tableprefix (dummydata) values ('$mysqlquerydata');" );	
+		$dotest = $wpdb->query( "select * from $tableprefix;" );	
+		$dotest = $wpdb->query( "update $tableprefix set dummydata='';" );	
+		$dotest = $wpdb->query( "delete from $tableprefix;" );	
+	}
+	$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
+	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=60%><font color='blue'><b>Query test ($count times)</b></font></td><td valign='top' width=20%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
+	$MySQLtotaltime=$result;
+	return $result;
+}
+
+
 
 function test_Math($count = 50000) {
 	$time_start = microtime(true);
