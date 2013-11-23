@@ -387,8 +387,8 @@ function mywebtonetperftest_plugin_all() {
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Our server=Green, Your server=Blue")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=0&header=<?php echo urlencode(serialize("Lower is better, Our server=Green, Your server=Blue")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
