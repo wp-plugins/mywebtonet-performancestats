@@ -1,24 +1,25 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.5
+ * @version 1.0.6
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
-Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
+Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server.
-Author: WebHosting A/S - MyWebToNet Ltd.
-Version: 1.0.5
+Author: Mywebtonet.com / Webhosting.dk
+Version: 1.0.6
 Author URI: http://www.mywebtonet.com 
 */
 
 $mysqlquerydata = str_repeat ("X" , 1000 );
-$ourdatamysql53 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
-$ourdatamysql54 = array("MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
-$ourdatamysql55 = array("MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
+$ourdatamysql53 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
+$ourdatamysql54 = array("Query test" => 0.32,"MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
+$ourdatamysql55 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
 $ourdataphp53 = array("PHP 1" => 1.45,"PHP 2" => 0.70,"PHP 3" => 0.40,"PHP 4" => 0.66);	
 $ourdataphp54 = array("PHP 1" => 0.29,"PHP 2" => 0.64,"PHP 3" => 0.29,"PHP 4" => 0.37);	
 $ourdataphp55 = array("PHP 1" => 0.28,"PHP 2" => 0.61,"PHP 3" => 0.24,"PHP 4" => 0.31);	
+$runquerycount = 200;
 
 if ( !defined('ABSPATH') ) {
 	echo "<center>You cant do this";
@@ -41,6 +42,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	global $wpdb;
 	global $ourdatamysql55;
 	global $ourdataphp55;
+	global $runquerycount;
 
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	mywebtonetperftest_createtable();
@@ -50,11 +52,11 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<?
 	if ($showtype == "fast") {
 		$headertext = "Best time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
 	}	
 	if ($showtype == "slow") {
 		$headertext = "Slowest time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
 	}	
 
 	foreach ( $getdata as $getdata ) {
@@ -64,6 +66,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 		exit;
 	}
 
+	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
 	<br><br><h3><? echo $headertext?></h3>
 	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
@@ -93,6 +96,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>MySQL statistics</b></td></tr>
 	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><? echo $getdata->mysqlversion;?></td>
+	<tr><td valign='top' align='left'>MySQL Query</td><td valign='top' align='left'><? echo $getdata->queryresult;?> seconds (<b><? echo $cresult ?></b> / second)</td>
 	<tr><td valign='top' align='left'>MySQL 1</td><td valign='top' align='left'><? echo $getdata->mysql1;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL 2</td><td valign='top' align='left'><? echo $getdata->mysql2;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><? echo $getdata->mysql3;?></td></tr>
@@ -103,7 +107,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
 	</table>
 	<?
-		$datamysql = array("MySQL 1" => $getdata->mysql1,"MySQL 2" => $getdata->mysql2,"MySQL 3" => $getdata->mysql3);	
+		$datamysql = array("Query result" => $getdata->queryresult,"MySQL 1" => $getdata->mysql1,"MySQL 2" => $getdata->mysql2,"MySQL 3" => $getdata->mysql3);	
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
 
 	?>		
@@ -111,12 +115,12 @@ function mywebtonetperftest_showfromdb($showtype) {
 			<table>
 			<tr>
 			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=1&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			<br>
 			</tr>
 			<tr>	
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Your server=Blue, Ours=Green")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Ours=Green, Your server=Blue")); ?>&mywebdata=<?php echo urlencode(serialize($ourdatamysql55));?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraph.php?showsmall=1&header=<?php echo urlencode(serialize("Lower is better, Ours=Green, Your server=Blue")); ?>&mywebdata=<?php echo urlencode(serialize($ourdataphp55)); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			</tr>	
 			</table>		
 		</td>
@@ -135,9 +139,10 @@ function mywebtonetperftest_showlist() {
 	global $ourdataphp54;
 	global $ourdataphp55;
 	mywebtonetperftest_createtable();
-	$mysqltotal53 = sprintf("%10.2f",$ourdatamysql53["MySQL 1"] + $ourdatamysql53["MySQL 2"] + $ourdatamysql53["MySQL 3"]);
-	$mysqltotal54 = sprintf("%10.2f",$ourdatamysql54["MySQL 1"] + $ourdatamysql54["MySQL 2"] + $ourdatamysql54["MySQL 3"]);
-	$mysqltotal55 = sprintf("%10.2f",$ourdatamysql55["MySQL 1"] + $ourdatamysql55["MySQL 2"] + $ourdatamysql55["MySQL 3"]);
+	$mysqltotal53 = sprintf("%10.2f",$ourdatamysql53["Query test"] + $ourdatamysql53["MySQL 1"] + $ourdatamysql53["MySQL 2"] + $ourdatamysql53["MySQL 3"]);
+	$mysqltotal54 = sprintf("%10.2f",$ourdatamysql54["Query test"] + $ourdatamysql54["MySQL 1"] + $ourdatamysql54["MySQL 2"] + $ourdatamysql54["MySQL 3"]);
+	$mysqltotal55 = sprintf("%10.2f",$ourdatamysql55["Query test"] + $ourdatamysql55["MySQL 1"] + $ourdatamysql55["MySQL 2"] + $ourdatamysql55["MySQL 3"]);
+	//
 	$phptotal53 = sprintf("%10.2f",$ourdataphp53["PHP 1"] + $ourdataphp53["PHP 2"] + $ourdataphp53["PHP 3"]  + $ourdataphp53["PHP 4"]);
 	$phptotal54 = sprintf("%10.2f",$ourdataphp54["PHP 1"] + $ourdataphp54["PHP 2"] + $ourdataphp54["PHP 3"]  + $ourdataphp54["PHP 4"]);
 	$phptotal55 = sprintf("%10.2f",$ourdataphp55["PHP 1"] + $ourdataphp55["PHP 2"] + $ourdataphp55["PHP 3"]  + $ourdataphp55["PHP 4"]);
@@ -192,7 +197,7 @@ function mywebtonetperftest_showlist() {
 		</tr>";
 	
 	
-	$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix group by uniqid order by dt asc;");
+	$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname from $tableprefix group by uniqid order by dt asc;");
 	foreach ( $getdata as $getdata ) {
 		echo "<tr><td valign='top'>".$getdata->tt."</td>
 		<td valign='top'><a href='http://".$getdata->servername."' target=_blank>".$getdata->servername."</a></td>
@@ -212,6 +217,9 @@ function mywebtonetperftest_showlist() {
 function mywebtonetperftest_createtable() {
 	global $wpdb;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
+	// if not exists... < 1.0.5
+	$altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
+	//	
 	$createtable = $wpdb->query( "
 	CREATE TABLE if not exists `$tableprefix` (
 	  `uniqid` bigint(20) NOT NULL auto_increment,
@@ -226,6 +234,7 @@ function mywebtonetperftest_createtable() {
 	  `serverloadnow` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `serverload5` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `serverload15` decimal(10,2) NOT NULL DEFAULT '0.00',
+	  `queryresult` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `mysql1` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `mysql2` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `mysql3` decimal(10,2) NOT NULL DEFAULT '0.00',
@@ -318,7 +327,8 @@ function mywebtonetperftest_plugin_all() {
 	}	
 
         DoHeader();
-	DoQueryTest();
+	$queryresult = DoQueryTest();
+	$MySQLtotaltime = $queryresult;
         DoMySQL();
         DoPHPTests();
         //
@@ -327,7 +337,7 @@ function mywebtonetperftest_plugin_all() {
 	mywebtonetperftest_createtable();
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$phpuname = addslashes($phpuname);
-	$storeresults = $wpdb->query( "	insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname');");
+	$storeresults = $wpdb->query( "	insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult');");
         //
 	// Finish
 	// 
@@ -353,6 +363,7 @@ function mywebtonetperftest_plugin_all() {
 	<input type='hidden' name='stringresult' value='<? echo $teststringresult ?>'>
 	<input type='hidden' name='testloopresult' value='<? echo $testloopresult ?>'>
 	<input type='hidden' name='ifelseresult' value='<? echo $testifelseresult ?>'>
+	<input type='hidden' name='queryresult' value='<? echo $queryresult ?>'>
 	<input type='hidden' name='mysqlresults' value='<? echo $mysqltemp ?>'>
 	<input type='hidden' name='phpmemorylimit' value='<? echo $memorylimit ?>'>
 	<input type='hidden' name='postmaxsize' value='<? echo $postmaxsize ?>'>
@@ -466,6 +477,7 @@ function DoMySQL() {
 	global $MySQLtotaltime;
 	global $mysqltemp;
 	global $mysqlresults;
+	global $queryresults;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$count = count($mysqltests);
 
@@ -489,23 +501,22 @@ function DoMySQL() {
 function DoQuerytest() {
 	global $wpdb;
 	global $mysqlquerydata;
-	global $MySQLtotaltime;
+	global $runquerycount;
+
 	$tableprefix = $wpdb->prefix."mywebtonetqtest";
 	$createtable = $wpdb->query("CREATE TABLE if not exists `$tableprefix` (`dummydata` text NOT NULL DEFAULT '')");
 	$time_start = microtime(true);
-	$count = 200;
 	echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><b>MySQL test: </b></td></tr>\n";
-	for ($i = 0; $i < $count; $i++) {
+	for ($i = 0; $i < $runquerycount ; $i++) {
 		$dotest = $wpdb->query( "insert into $tableprefix (dummydata) values ('$mysqlquerydata');" );	
 		$dotest = $wpdb->query( "select * from $tableprefix;" );	
 		$dotest = $wpdb->query( "update $tableprefix set dummydata='';" );	
 		$dotest = $wpdb->query( "delete from $tableprefix;" );	
 	}
 	$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
-	$cresult = sprintf("%0.0f",$count /$result);
-	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($count times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds ($cresult/sec)</td></tr>\n";	
-	$MySQLtotaltime=$result;
+	$cresult = sprintf("%0.0f",$runquerycount /$result);
+	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($runquerycount times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds $cresult/sec)</td></tr>\n";	
 	return $result;
 }
 

@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.7.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,19 +15,19 @@ With this plugin you can "dyno tests" the CPU performance of your PHP webserver 
 You can easily determine the CPU performance allocated for your PHP web and MySQL
 backend servers with this plugin. The plugin does various calculations and string
 manipulations on your PHP webserver + some simple CPU tests on your MySQL backend 
-server. Furthermore a sequence of MySQL insert,select,update and delete is performed
-in a seperate table. After the test has run, the result will be displayed for you to 
-evaluate. 
+server. Furthermore a sequence of MySQL inserts,selects,updates and deletes are 
+performed in a seperate table (we do not use your WordPress tables for this). After 
+the test has run, the result will be displayed for you to evaluate. 
 
 Generally speaking, the  faster this plugin runs, the faster your website will run. 
 
 There are many factors that will determine how fast your website will run. This 
 plugin does not test e.g. for how many hits a second your provider allows to your 
-web, filesystem performance is not tested either. Use it as a simple performance 
+web, filesystem performance is not tested either. Use it as a performance 
 test on how fast a CPU your provider has allocated to your webserver and your MySQL
-database backend.
+database backend. 
 
-Share with your friends, let's start a competition :-)
+Share with your friends, let's start a competition and see who is the fastests :-)
 
 == Installation ==
 
@@ -42,7 +42,7 @@ e.g.
 == Changelog ==
 
 = 1.0 =
-* This is the first stable release of this plugin
+* This is the first stable release of this plugin.
 
 = 1.0.1 =
 * Minor correction in the submit results section.
@@ -54,7 +54,10 @@ e.g.
 Now with even more graphs :-) Now your fastest and slowest times are logged in the database.
 
 = 1.0.5 =
-Minor code changes. Query test added
+Minor code changes.
+
+= 1.0.6 =
+Query test added.
 
 == Upgrade Notice ==
 
@@ -71,7 +74,9 @@ Now with graphs :-) Thanks to http://www.ebrueggeman.com
 Now with even more graphs :-) Now your fastest and slowest times are logged in the database.
 
 = 1.0.5 =
-Minor code changes. Query test added
+Minor code changes.
 
+= 1.0.6 =
+Query test added.
 
 
