@@ -515,7 +515,7 @@ function DoQuerytest() {
 	}
 	$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
 	$cresult = sprintf("%0.0f",$runquerycount /$result);
-	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($runquerycount times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds $cresult/sec)</td></tr>\n";	
+	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($runquerycount times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds (<b>$cresult/sec</b>)</td></tr>\n";	
 	return $result;
 }
 
