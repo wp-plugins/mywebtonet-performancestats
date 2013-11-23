@@ -269,10 +269,6 @@ function mywebtonetperftest_fast() {
 
 function mywebtonetperftest_plugin_menu() {
 	add_menu_page('mywebtonetperftest_plugin_all', 'Performance test', 'manage_options', 'mywebtonetperftest_plugin_all','mywebtonetperftest_plugin_all');
-//	add_submenu_page('mywebtonetperftest_plugin_all', __('Run test','myweb-menu'),'', 'manage_options', 'sub-page', 'mywebtonetperftest_plugin_all');
-//  	add_submenu_page('mywebtonetperftest_plugin_all', __('Show fastest time','myweb-menu'),__('Show fastest time','myweb-menu'), 'manage_options', 'sub-page2', 'mywebtonetperftest_fast');
-//  	add_submenu_page('mywebtonetperftest_plugin_all', __('Show slowest time','myweb-menu'),__('Show slowest time','myweb-menu'), 'manage_options', 'sub-page3', 'mywebtonetperftest_slow');
-
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show fastest time','myweb-menu'),__('Show fastest time','myweb-menu'), 'manage_options', 'sub-page2', 'mywebtonetperftest_fast');
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show slowest time','myweb-menu'),__('Show slowest time','myweb-menu'), 'manage_options', 'sub-page3', 'mywebtonetperftest_slow');
   	add_submenu_page('mywebtonetperftest_plugin_all', __('Show list of tests','myweb-menu'),__('Show list of tests','myweb-menu'), 'manage_options', 'sub-page4', 'mywebtonetperftest_showlist');
@@ -315,6 +311,9 @@ function mywebtonetperftest_plugin_all() {
         echo "<tr><td valign='top'>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
         echo "<tr><td valign='top'>MySQL version : <font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
         echo "</table>\n";
+	//
+	// Windows shouldn't give us the load average
+	//	
 	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		echo "<tr><td valign='top'>Server load now:</td><td valign='top' align='right'><b>Unable to fetch load as windows is used for webserver (incompatible)</b></td></tr>\n";
 	} else {
@@ -502,7 +501,7 @@ function DoQuerytest() {
 	global $wpdb;
 	global $mysqlquerydata;
 	global $runquerycount;
-
+	//
 	$tableprefix = $wpdb->prefix."mywebtonetqtest";
 	$createtable = $wpdb->query("CREATE TABLE if not exists `$tableprefix` (`dummydata` text NOT NULL DEFAULT '')");
 	$time_start = microtime(true);
