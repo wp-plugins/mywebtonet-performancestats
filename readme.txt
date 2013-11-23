@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: mywebtonet
 Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
-Tags: php, mysql, performance, testing, speed, dyno test
+Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.7.1
 Stable tag: 1.0.5
@@ -51,7 +51,7 @@ e.g.
 Now with even more graphs :-) Now your fastest and slowest times are logged in the database.
 
 = 1.0.5 =
-Minor code changes.
+Minor code changes. Query test added
 
 == Upgrade Notice ==
 
@@ -68,7 +68,7 @@ Now with graphs :-) Thanks to http://www.ebrueggeman.com
 Now with even more graphs :-) Now your fastest and slowest times are logged in the database.
 
 = 1.0.5 =
-Minor code changes.
+Minor code changes. Query test added
 
 
 
