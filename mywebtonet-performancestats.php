@@ -333,7 +333,7 @@ function mywebtonetperftest_plugin_all() {
 	// 
 	echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><b>All tests:</b></td></tr>\n";
-	echo "<tr><td valign='top' width=20%>Total time</td><td valign='top' width=60%><b>(all MySQL + PHP tests)</td><td valign='top' width=20%> :<font color='blue'><b>".sprintf("%6.2f",$PHPtotaltime+$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
+	echo "<tr><td valign='top' width=20%>Total time</td><td valign='top' width=58%><b>(all MySQL + PHP tests)</td><td valign='top' width=22%> :<font color='blue'><b>".sprintf("%6.2f",$PHPtotaltime+$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 	$md5time = md5(time().$servername);
 	?>
 	<center>
@@ -442,7 +442,7 @@ function DoPHPTests() {
 	$PHPtotaltime =0;
 	$testmathresult = test_Math();
 	$PHPtotaltime = $PHPtotaltime + $testmathresult;
-	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=60%><font color='blue'><b> Math test</b></font></td><td valign='top' width=20%> :".sprintf("%6.2f",$testmathresult)." seconds</td></tr>\n";	
+	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b> Math test</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$testmathresult)." seconds</td></tr>\n";	
 	//
 	$teststringresult = test_StringManipulation();
 	$PHPtotaltime = $PHPtotaltime + $teststringresult;
@@ -475,7 +475,7 @@ function DoMySQL() {
 		$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
 		$mysqlresults[]=$result;
 		$MySQLtotaltime = $MySQLtotaltime + $result;
-		echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=60%><font color='blue'><b>$mysqltests[$i]</b></font></td><td valign='top' width=20%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
+		echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>$mysqltests[$i]</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
 		flush();
 	}
 	$count = count($mysqlresults);
@@ -503,7 +503,8 @@ function DoQuerytest() {
 		$dotest = $wpdb->query( "delete from $tableprefix;" );	
 	}
 	$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
-	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=60%><font color='blue'><b>Query test ($count times)</b></font></td><td valign='top' width=20%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
+	$cresult = sprintf("%0.0f",$count /$result);
+	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($count times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds ($cresult/sec)</td></tr>\n";	
 	$MySQLtotaltime=$result;
 	return $result;
 }
