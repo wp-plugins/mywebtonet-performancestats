@@ -16,7 +16,7 @@ $mysqlquerydata = str_repeat ("X" , 1000 );
 $ourdatamysql53 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
 $ourdatamysql54 = array("Query test" => 0.32,"MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
 $ourdatamysql55 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
-$ourdataphp53 = array("PHP 1" => 1.45,"PHP 2" => 0.70,"PHP 3" => 0.40,"PHP 4" => 0.66);	
+$ourdataphp53 = array("PHP 1" => 0.35,"PHP 2" => 0.71,"PHP 3" => 0.39,"PHP 4" => 0.65);	
 $ourdataphp54 = array("PHP 1" => 0.29,"PHP 2" => 0.64,"PHP 3" => 0.29,"PHP 4" => 0.37);	
 $ourdataphp55 = array("PHP 1" => 0.28,"PHP 2" => 0.61,"PHP 3" => 0.24,"PHP 4" => 0.31);	
 $runquerycount = 200;
@@ -165,7 +165,7 @@ function mywebtonetperftest_showlist() {
 	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
 	<?
-	echo "<tr><td>Sunday 3rd November 2013 23:45:11</td>
+	echo "<tr><td>Saturday 23rd November 2013 20:36:35</td>
 		<td>MyWebToNet PHP 5.3 server</td>
 		<td>81.19.232.65</td><td>5.3.27</td>
 		<td>5.6.14</td>
@@ -175,9 +175,9 @@ function mywebtonetperftest_showlist() {
 		<td><font color='blue'><b>$phpperformanceindex53</b></font></td>
 		<td><font color='blue'><b>$mysqlperformanceindex53</b></font></td>
 		</tr>";
-	echo "<tr><td>Sunday 3rd November 2013 23:44:21</td>
+	echo "<tr><td>Saturday 23rd November 2013 20:40:12</td>
 		<td>MyWebToNet PHP 5.4 server</td>
-		<td>81.19.232.55</td><td>5.4.21</td>
+		<td>81.19.232.55</td><td>5.4.22</td>
 		<td>5.6.14</td>
 		<td>$mysqltotal54</td>
 		<td>$phptotal54</td>
@@ -185,9 +185,9 @@ function mywebtonetperftest_showlist() {
 		<td><font color='blue'><b>$phpperformanceindex54</b></font></td>
 		<td><font color='blue'><b>$mysqlperformanceindex54</b></font></td>
 		</tr>";
-	echo "<tr><td>Sunday 3rd November 2013 23:48:33</td>
+	echo "<tr><td>Saturday 23rd November 2013 20:41:23</td>
 		<td>MyWebToNet PHP 5.5 server</td>
-		<td>81.7.161.141</td><td>5.5.5</td>
+		<td>81.7.161.141</td><td>5.5.6</td>
 		<td>5.6.14</td>
 		<td>$mysqltotal55</td>
 		<td>$phptotal55</td>
