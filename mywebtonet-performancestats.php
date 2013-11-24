@@ -405,7 +405,7 @@ function ShowFooter() {
 	<a href="<?php echo MYWEB_URL; ?>perftestphp55.png" target=_blank><img src="<?php echo MYWEB_URL; ?>perftestphp55.png" width=326 height=228 alt="PHP 5.5 test result" border=0></a>
 	<br><br>
 	</center>
-	Plugin URL <a href='http://www.mywebtonet.com/files/wordpressplugins' target=_blank><b>http://www.mywebtonet.com/files/wordpressplugins</b></a>
+	Plugin URL <a href='http://wordpress.org/plugins/mywebtonet-performancestats/' target=_blank><b>http://wordpress.org/plugins/mywebtonet-performancestats/</b></a>
 	<br><br>
 	Script made by <a href='http://www.mywebtonet.com' target=_blank><b>http://www.mywebtonet.com</b></a>&nbsp;&nbsp;<a href='http://www.webhosting.dk' target=_blank><b>http://www.webhosting.dk</b></a>
 <?			
