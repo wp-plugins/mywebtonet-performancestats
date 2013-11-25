@@ -17,9 +17,13 @@ backend servers with this plugin. The plugin does various calculations and strin
 manipulations on your PHP webserver + some simple CPU tests on your MySQL backend 
 server. Furthermore a sequence of MySQL inserts,selects,updates and deletes are 
 performed in a seperate table (we do not use your WordPress tables for this). After 
-the test has run, the result will be displayed for you to evaluate. 
+the test has run, the result will be displayed for you to evaluate. Typical
+results for this test if 0.05-0.25 seconds if a MySQL socket connection is used. We
+use dedicated servers in our own setup and that requires a network connection, which is
+a bit slower, therefore the data provided for our servers are a bit slower. 
 
-Generally speaking, the  faster this plugin runs, the faster your website will run. 
+Generally speaking, the  faster this plugin runs, the faster your 
+website will run.
 
 There are many factors that will determine how fast your website will run. This 
 plugin does not test e.g. for how many hits a second your provider allows to your 
