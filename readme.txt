@@ -18,7 +18,7 @@ manipulations on your PHP webserver + some simple CPU tests on your MySQL backen
 server. Furthermore a sequence of MySQL inserts,selects,updates and deletes are 
 performed in a seperate table (we do not use your WordPress tables for this). After 
 the test has run, the result will be displayed for you to evaluate. Typical
-results for this test if 0.05-0.25 seconds if a MySQL socket connection is used. We
+results for this test is 0.05-0.25 seconds if a MySQL socket connection is used. We
 use dedicated servers in our own setup and that requires a network connection, which is
 a bit slower, therefore the data provided for our servers are a bit slower. 
 
