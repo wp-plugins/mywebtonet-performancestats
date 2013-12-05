@@ -382,7 +382,7 @@ function mywebtonetperftest_plugin_all() {
 			<table>
 			<tr>
 			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($datamysql)); ?>" /></td>
-			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("MySQL results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
+			<td><img src="<?php echo MYWEB_URL; ?>showgraphpie.php?showsmall=0&header=<?php echo urlencode(serialize("PHP results")); ?>&mydata=<?php echo urlencode(serialize($dataphp)); ?>" /></td>
 			<br>
 			</tr>
 			<tr>	
