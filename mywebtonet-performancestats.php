@@ -69,7 +69,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
 	<br><br><h3><? echo $headertext?></h3>
-	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
+	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
 	<tr><td valign='top' align='left'>Time of test</td><td valign='top' align='left'><font color='blue'><a href='http://<? echo $getdata->servername ?>' target=_blank</a><? echo $getdata->tt;?></font></td></tr>
@@ -347,7 +347,7 @@ function mywebtonetperftest_plugin_all() {
 	?>
 	<center>
 	<br>
-	<table width='90%' border=0 bgcolor='fcfcfc' cellpadding=0 cellspacing=6 style='border-width: 1px; border-color:#cccccc; border-style: solid;'>
+	<table width='90%' cellpadding=2 cellspacing=6 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td valign='top' align='left'>
 	By submitting results we can evaluate figures and compare one test to the other. No tests will ever get disclosed. If you <b>do not want</b> this information to be submitted, please do <b>not</B> press the submit button.
 	</td></tr></table>
