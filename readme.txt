@@ -16,12 +16,12 @@ Run the performance test on your server, and see the computer power allocated fo
 PHP web and MySQL backend servers. 
 
 This plugin does various calculations and string manipulations on your PHP webserver 
-and some CPU tests on your MySQL backend server. To further test the MySQL server, a 
-sequence  of MySQL inserts, selects, updates and deletes are performed in a seperate 
+and on your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
+inserts, selects, updates and deletes are performed in a seperate 
 custom database table (we do not use your WordPress tables for this) are performed as 
 well.
  
-After the tests has run, the results will be displayed for you to evaluate. Typical 
+After the sequence of tests are finished, the results will be displayed for you to evaluate. Typical 
 results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection 
 is used. Web hosting providers with dedicated servers (like us) will show a slower 
 time/queries per second, as TCP/IP connection is made instead. 
@@ -30,7 +30,7 @@ Generally speaking, the faster this plugin runs, the faster your website will ru
 
 There are many factors that will determine how fast your website will run. This 
 plugin does not test for how many hits a second your provider allows to your website
-filesystem performance is not tested either. Use it as a performance test on how 
+, filesystem performance is not tested either. Use it as a performance test on how 
 fast a CPU your provider has allocated to your webserver and your MySQL database 
 backend. 
 
