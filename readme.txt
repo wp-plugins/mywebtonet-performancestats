@@ -8,28 +8,31 @@ Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With this plugin you can "dyno tests" the CPU performance of your PHP webserver and MySQL database backend server.
+With this plugin you can "dyno tests" the performance of your PHP webserver and MySQL database backend server.
 
 == Description ==
 
-You can easily determine the CPU performance allocated for your PHP web and MySQL
-backend servers with this plugin. The plugin does various calculations and string
-manipulations on your PHP webserver + some simple CPU tests on your MySQL backend 
-server. Furthermore a sequence of MySQL inserts,selects,updates and deletes are 
-performed in a seperate table (we do not use your WordPress tables for this). After 
-the test has run, the result will be displayed for you to evaluate. Typical
-results for this test is 0.05-0.25 seconds if a MySQL socket connection is used. We
-use dedicated servers in our own setup and that requires a network connection, which is
-a bit slower, therefore the data provided for our servers are a bit slower. 
+Run the performance test on your server, and see the computer power allocated for your
+PHP web and MySQL backend servers. 
 
-Generally speaking, the  faster this plugin runs, the faster your 
-website will run.
+This plugin does various calculations and string manipulations on your PHP webserver 
+and some CPU tests on your MySQL backend server. To further test the MySQL server, a 
+sequence  of MySQL inserts, selects, updates and deletes are performed in a seperate 
+custom database table (we do not use your WordPress tables for this) are performed as 
+well.
+ 
+After the tests has run, the results will be displayed for you to evaluate. Typical 
+results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection 
+is used. Web hosting providers with dedicated servers (like us) will show a slower 
+time/queries per second, as TCP/IP connection is made instead. 
+
+Generally speaking, the faster this plugin runs, the faster your website will run.
 
 There are many factors that will determine how fast your website will run. This 
-plugin does not test e.g. for how many hits a second your provider allows to your 
-web, filesystem performance is not tested either. Use it as a performance 
-test on how fast a CPU your provider has allocated to your webserver and your MySQL
-database backend. 
+plugin does not test for how many hits a second your provider allows to your website
+filesystem performance is not tested either. Use it as a performance test on how 
+fast a CPU your provider has allocated to your webserver and your MySQL database 
+backend. 
 
 Share with your friends, let's start a competition and see who is the fastests :-)
 
