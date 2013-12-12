@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.6
+ * @version 1.0.7
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.0.6
+Version: 1.0.7
 Author URI: http://www.mywebtonet.com 
 */
 
