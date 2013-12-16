@@ -104,7 +104,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Network test</b></td></tr>
-	<tr><td valign='top' align='left'>100 Mb file</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->networktest;?></b></font> Kbs</td></font>
+	<tr><td valign='top' align='left'>Fetch data from nearest google CDN point</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->networktest;?></b></font> Mbps</td></font>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Summary</b></td></tr>
 	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
@@ -564,14 +564,29 @@ function test_StringManipulation($count = 100000) {
 
 
 function test_Network() {
+	//
+	// get hostnames in DNS cache
+	//
+        $dummy = file_get_contents('http://www.webhosting.dk/1mbfile');
+        $dummy = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
 	$time_start = microtime(true);
-	$getdata = file_get_contents('http://www.webhosting.dk/100mbfile');
-	$lenfile = strlen($getdata);
+	//
+        // at least we have some data in case google is down
+	//        
+        $data = file_get_contents('http://www.webhosting.dk/1mbfile');
+        //
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
 	$time_end = microtime(true) - $time_start;
-	$mbps = sprintf('%.2f', $lenfile * 8 / 1024 / 1024 / $time_end);
+	$lenfile = strlen($data);
+	$mbps = sprintf('%.2f', (($lenfile * 8) / 1024 / 1024) / $time_end);
         echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><B>Network test:</b></td></tr>\n";
-	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Fetch 100 Mb file</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Kbs</td></tr>\n";	
+	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Fetch data from nearest google CDN point</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Mbps</td></tr>\n";	
 	echo "</table>\n";
 	return $mbps;
 }

@@ -13,22 +13,26 @@ With this plugin you can "dyno tests" the performance of your PHP webserver and 
 == Description ==
 
 Run the performance test on your server, and see the computer power allocated for your
-PHP web and MySQL backend servers. 
+PHP web and MySQL backend servers + a network speed test to test our network. 
 
+CPU performance testing:
 This plugin does various calculations and string manipulations on your PHP webserver 
 and on your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
-inserts, selects, updates and deletes are performed in a seperate 
-custom database table (we do not use your WordPress tables for this). 
+inserts, selects, updates and deletes are performed in a seperate custom database table 
+(we do not use your WordPress tables for this). 
 
-Furthermore we do a network test. The network is testet by fetching a 100 Mb file from our 
-servers. We are working or a more accurate solution which requires finding a way to fetch a 
-file from a nearby server instead of a server that might be far from your webserver. As this 
-is not accurate we do not show any graphs for the network test.
+Network testing:
+We do a network test. The network is tested by fetching a 1 Mb file from our servers and 
+directly from googles CDN / apis network. Fetching from the google apis network gives you 
+the nearest server and will give more accurate results. We fetch a small 1Mb file 
+from our servers as well in case google apis is down. The network tests are not yet shown in 
+the graphs, we are working on it :-)
  
+Results:
 After the sequence of tests are finished, the results will be displayed for you to evaluate. Typical 
-results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection 
-is used. Web hosting providers with dedicated servers (like us) will show a slower 
-time/queries per second, as TCP/IP connection is made instead. 
+results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection is used. Web hosting 
+providers with dedicated servers (like us) will show a slower time/queries per second, as a TCP/IP 
+connection to the MySQL server is made instead og a local socket conenction. 
 
 Generally speaking, the faster this plugin runs, the faster your website will run.
 
