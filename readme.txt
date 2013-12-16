@@ -32,7 +32,7 @@ Results:
 After the sequence of tests are finished, the results will be displayed for you to evaluate. Typical 
 results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection is used. Web hosting 
 providers with dedicated servers (like us) will show a slower time/queries per second, as a TCP/IP 
-connection to the MySQL server is made instead og a local socket conenction. 
+connection to the MySQL server is made instead of a local socket connection. 
 
 Generally speaking, the faster this plugin runs, the faster your website will run.
 
