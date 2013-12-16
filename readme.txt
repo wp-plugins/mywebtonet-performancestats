@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.8.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,8 +18,12 @@ PHP web and MySQL backend servers.
 This plugin does various calculations and string manipulations on your PHP webserver 
 and on your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
 inserts, selects, updates and deletes are performed in a seperate 
-custom database table (we do not use your WordPress tables for this) are performed as 
-well.
+custom database table (we do not use your WordPress tables for this). 
+
+Furthermore we do a network test. The network is testet by fetching a 100 Mb file from our 
+servers. We are working or a more accurate solution which requires finding a way to fetch a 
+file from a nearby server instead of a server that might be far from your webserver. As this 
+is not accurate we do not show any graphs for the network test.
  
 After the sequence of tests are finished, the results will be displayed for you to evaluate. Typical 
 results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection 
@@ -69,6 +73,9 @@ Query test added.
 = 1.0.7 =
 Minor changes. Tested on WordPress 3.8.
 
+= 1.0.8 =
+Now with network testing tool
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -92,4 +99,6 @@ Query test added.
 = 1.0.7 =
 Minor changes. Tested on WordPress 3.8.
 
+= 1.0.8 =
+Now with network testing tool
 

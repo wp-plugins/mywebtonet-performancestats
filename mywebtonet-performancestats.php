@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.7
+ * @version 1.0.8
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.0.7
+Version: 1.0.8
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -52,11 +52,11 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<?
 	if ($showtype == "fast") {
 		$headertext = "Best time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
 	}	
 	if ($showtype == "slow") {
 		$headertext = "Slowest time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
 	}	
 
 	foreach ( $getdata as $getdata ) {
@@ -102,6 +102,9 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><? echo $getdata->mysql3;?></td></tr>
 	<tr><td valign='top' align='left'>MySQL total time</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->mysqlresult;?></b></td></tr>
 	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
+	<tr><td><br></td></tr>
+	<tr><td valign='top' align='left'><b>Network test</b></td></tr>
+	<tr><td valign='top' align='left'>100 Mb file</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->networktest;?></b></font> Kbs</td></font>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Summary</b></td></tr>
 	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
@@ -219,6 +222,7 @@ function mywebtonetperftest_createtable() {
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	// if not exists... < 1.0.5
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
+	$altertable = $wpdb->query("ALTER TABLE $tableprefix add networktest decimal(10,2) NOT NULL DEFAULT '0.00'");
 	//	
 	$createtable = $wpdb->query( "
 	CREATE TABLE if not exists `$tableprefix` (
@@ -242,6 +246,7 @@ function mywebtonetperftest_createtable() {
 	  `php2` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `php3` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `php4` decimal(10,2) NOT NULL DEFAULT '0.00',
+	  `networktest` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `deleteable` int(11) NOT NULL default '1',
 	  `dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	   UNIQUE KEY `uniqid` (`uniqid`),
@@ -330,13 +335,18 @@ function mywebtonetperftest_plugin_all() {
 	$MySQLtotaltime = $queryresult;
         DoMySQL();
         DoPHPTests();
+	$networktest = test_Network();
+	//
+	//
+	//
+
         //
         // Store results in DB
 	//
 	mywebtonetperftest_createtable();
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$phpuname = addslashes($phpuname);
-	$storeresults = $wpdb->query( "	insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult');");
+	$storeresults = $wpdb->query("insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult,networktest) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult','$networktest');");
         //
 	// Finish
 	// 
@@ -370,6 +380,7 @@ function mywebtonetperftest_plugin_all() {
 	<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
 	<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
 	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
+	<input type='hidden' name='networktest' value='<? echo $networktest ?>'>
 	<input type='hidden' name='mysqlversion' value='<? echo $mysqlversion ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	</form>
@@ -486,7 +497,7 @@ function DoMySQL() {
 		$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
 		$mysqlresults[]=$result;
 		$MySQLtotaltime = $MySQLtotaltime + $result;
-		echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>$mysqltests[$i]</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
+		echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>$mysqltests[$i]</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
 		flush();
 	}
 	$count = count($mysqlresults);
@@ -515,7 +526,7 @@ function DoQuerytest() {
 	}
 	$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
 	$cresult = sprintf("%0.0f",$runquerycount /$result);
-	echo "<tr><td valign='top' wdith=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($runquerycount times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds (<b>$cresult/sec</b>)</td></tr>\n";	
+	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Query test ($runquerycount times)</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds (<b>$cresult/sec</b>)</td></tr>\n";	
 	return $result;
 }
 
@@ -551,6 +562,19 @@ function test_StringManipulation($count = 100000) {
 	return sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));
 }
 
+
+function test_Network() {
+	$time_start = microtime(true);
+	$getdata = file_get_contents('http://www.webhosting.dk/100mbfile');
+	$lenfile = strlen($getdata);
+	$time_end = microtime(true) - $time_start;
+	$mbps = sprintf('%.2f', $lenfile * 8 / 1024 / 1024 / $time_end);
+        echo "<table width=70%>\n";
+	echo "<tr><td valign='top'><B>Network test:</b></td></tr>\n";
+	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Fetch 100 Mb file</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Kbs</td></tr>\n";	
+	echo "</table>\n";
+	return $mbps;
+}
 
 function test_Loops($count = 10000000) {
 	$time_start = microtime(true);
