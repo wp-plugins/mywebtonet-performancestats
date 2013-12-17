@@ -14,15 +14,15 @@ With this plugin you can "dyno tests" the performance of your PHP and MySQL serv
 
 CPU performance testing:
 This plugin does various calculations and string manipulations on your PHP webserver 
-and on your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
+and your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
 inserts, selects, updates and deletes are performed in a seperate custom database table 
 (we do not use your WordPress tables for this). 
 
 Network testing:
-The network is tested by fetching a 1 Mb file from our servers and directly from googles CDN / apis 
-network. Fetching from the google apis network gives you the nearest server and will give more accurate 
-results. We fetch a small 1Mb file from our servers as well in case google apis is down. The network 
-tests are not yet shown in the graphs, we are working on it :-)
+The network is tested by fetching directly from googles CDN / apis network. Fetching from the google 
+apis network gives you the nearest server and will give more accurate results. We also fetch a small 1Mb 
+file from our servers as well in case google apis is down. The network tests are not yet shown in the 
+graphs, we are working on it :-)
  
 Results:
 After the sequence of tests has finished, the results will be displayed for you to evaluate. Typical 
