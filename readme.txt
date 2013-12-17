@@ -8,12 +8,9 @@ Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With this plugin you can "dyno tests" the performance of your PHP webserver and MySQL database backend server.
+With this plugin you can "dyno tests" the performance of your PHP and MySQL servers and run a network test to determine the speed of your network.
 
 == Description ==
-
-Run the performance test on your server, and see the computer power allocated for your
-PHP web and MySQL backend servers + a network speed test to test our network. 
 
 CPU performance testing:
 This plugin does various calculations and string manipulations on your PHP webserver 
@@ -22,25 +19,23 @@ inserts, selects, updates and deletes are performed in a seperate custom databas
 (we do not use your WordPress tables for this). 
 
 Network testing:
-We do a network test. The network is tested by fetching a 1 Mb file from our servers and 
-directly from googles CDN / apis network. Fetching from the google apis network gives you 
-the nearest server and will give more accurate results. We fetch a small 1Mb file 
-from our servers as well in case google apis is down. The network tests are not yet shown in 
-the graphs, we are working on it :-)
+The network is tested by fetching a 1 Mb file from our servers and directly from googles CDN / apis 
+network. Fetching from the google apis network gives you the nearest server and will give more accurate 
+results. We fetch a small 1Mb file from our servers as well in case google apis is down. The network 
+tests are not yet shown in the graphs, we are working on it :-)
  
 Results:
-After the sequence of tests are finished, the results will be displayed for you to evaluate. Typical 
-results for the MySQL query test is 0.05-0.25 seconds if a MySQL socket connection is used. Web hosting 
-providers with dedicated servers (like us) will show a slower time/queries per second, as a TCP/IP 
-connection to the MySQL server is made instead of a local socket connection. 
+After the sequence of tests has finished, the results will be displayed for you to evaluate. Typical 
+results for the MySQL query test is 0.05-0.25 seconds, but only if a MySQL socket connection is used. 
+Web hosting providers with dedicated servers (like us) will show a slower time/queries per second, as a 
+TCP/IP connection to the MySQL server is made instead of a local socket connection. 
 
 Generally speaking, the faster this plugin runs, the faster your website will run.
 
-There are many factors that will determine how fast your website will run. This 
-plugin does not test for how many hits a second your provider allows to your website
-, filesystem performance is not tested either. Use it as a performance test on how 
-fast a CPU your provider has allocated to your webserver and your MySQL database 
-backend. 
+There are many factors that will determine how fast your website will run. This plugin does not test 
+for how many hits a second your provider allows to your website, filesystem performance is not tested 
+either. Use it as a performance test on how fast a CPU your provider has allocated to your webserver 
+and your MySQL database backend. 
 
 Share with your friends, let's start a competition and see who is the fastests :-)
 
