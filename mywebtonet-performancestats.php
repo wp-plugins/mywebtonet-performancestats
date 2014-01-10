@@ -52,11 +52,11 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<?
 	if ($showtype == "fast") {
 		$headertext = "Best time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest,maxexectime,apacheversion,uploadmaxsize from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
 	}	
 	if ($showtype == "slow") {
 		$headertext = "Slowest time";
-		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
+		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest,maxexectime,apacheversion,uploadmaxsize from $tableprefix where deleteable=1 group by uniqid order by mysqlresult desc limit 1;");
 	}	
 
 	foreach ( $getdata as $getdata ) {
@@ -76,6 +76,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>Server name</td><td valign='top' align='left'><font color='blue'><a href='http://<? echo $getdata->servername ?>' target=_blank</a><? echo $getdata->servername;?></font></td></tr>
 	<tr><td valign='top' align='left'>Server Addr</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serveraddr;?></font></td></tr>
 	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><? echo $getdata->phpos;?></td></tr>
+	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><? echo $getdata->apacheversion;?></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Server load statistics</b></td></tr>
 	<tr><td valign='top' align='left'>Load now</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serverloadnow;?></td></tr>
@@ -86,7 +87,9 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>PHP uname</td><td valign='top' align='left'><? echo $getdata->phpuname;?></td></tr>
 	<tr><td valign='top' align='left'>PHP version</td><td valign='top' align='left'><? echo $getdata->phpversion;?></td></tr>
 	<tr><td valign='top' align='left'>PHP memory limit</td><td valign='top' align='left'><font color='blue'><? echo $getdata->memorylimit;?></td></tr>
-	<tr><td valign='top' align='left'>PHP postmaxsize</td><td valign='top' align='left'><font color='blue'><? echo $getdata->postmaxsize;?></td></tr>
+	<tr><td valign='top' align='left'>PHP post_max_size</td><td valign='top' align='left'><font color='blue'><? echo $getdata->postmaxsize;?></td></tr>
+	<tr><td valign='top' align='left'>PHP upload_max_filesize</td><td valign='top' align='left'><font color='blue'><? echo $getdata->uploadmaxsize;?></td></tr>
+	<tr><td valign='top' align='left'>PHP max_execution_time</td><td valign='top' align='left'><font color='blue'><? echo $getdata->maxexectime;?></td></tr>
 	<tr><td valign='top' align='left'>PHP test 1</td><td valign='top' align='left'><? echo $getdata->php1;?></td></tr>
 	<tr><td valign='top' align='left'>PHP test 2</td><td valign='top' align='left'><? echo $getdata->php2;?></td></tr>
 	<tr><td valign='top' align='left'>PHP test 3</td><td valign='top' align='left'><? echo $getdata->php3;?></td></tr>
@@ -223,6 +226,9 @@ function mywebtonetperftest_createtable() {
 	// if not exists... < 1.0.5
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add networktest decimal(10,2) NOT NULL DEFAULT '0.00'");
+	$altertable = $wpdb->query("ALTER TABLE $tableprefix add apacheversion varchar(100) NOT NULL DEFAULT ''");
+	$altertable = $wpdb->query("ALTER TABLE $tableprefix add uploadmaxsize varchar(10) NOT NULL DEFAULT ''");
+	$altertable = $wpdb->query("ALTER TABLE $tableprefix add maxexectime int NOT NULL DEFAULT '0'");
 	//	
 	$createtable = $wpdb->query( "
 	CREATE TABLE if not exists `$tableprefix` (
@@ -247,6 +253,9 @@ function mywebtonetperftest_createtable() {
 	  `php3` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `php4` decimal(10,2) NOT NULL DEFAULT '0.00',
 	  `networktest` decimal(10,2) NOT NULL DEFAULT '0.00',
+	  `apacheversion` varchar(100) NOT NULL DEFAULT '',
+	  `uploadmaxsize` varchar(10) NOT NULL DEFAULT '',
+	  `maxexectime` int NOT NULL DEFAULT '0',
 	  `deleteable` int(11) NOT NULL default '1',
 	  `dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	   UNIQUE KEY `uniqid` (`uniqid`),
@@ -316,9 +325,9 @@ function mywebtonetperftest_plugin_all() {
         echo "<tr><td valign='top'>PHP host information</td><td><font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
         echo "<tr><td valign='top'>PHP version</td><td><font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
 	echo "<tr><td valign='top'>PHP memory limit</td><td><font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP post max size</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP upload max size</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP maximum execution time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP post_max_size</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP upload_max_size</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP max_execution_time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
 	if ($apacheversion != "") {
 		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
 	}
@@ -353,7 +362,7 @@ function mywebtonetperftest_plugin_all() {
 	mywebtonetperftest_createtable();
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$phpuname = addslashes($phpuname);
-	$storeresults = $wpdb->query("insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult,networktest) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult','$networktest');");
+	$storeresults = $wpdb->query("insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult,networktest,apacheversion,uploadmaxsize,maxexectime) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult','$networktest','$apacheversion','$uploadmaxsize','$maxexectime');");
         //
 	// Finish
 	// 
@@ -389,6 +398,9 @@ function mywebtonetperftest_plugin_all() {
 	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
 	<input type='hidden' name='networktest' value='<? echo $networktest ?>'>
 	<input type='hidden' name='mysqlversion' value='<? echo $mysqlversion ?>'>
+	<input type='hidden' name='apacheversion' value='<? echo $apacheversion ?>'>
+	<input type='hidden' name='uploadmaxsize' value='<? echo $uploadmaxsize ?>'>
+	<input type='hidden' name='maxexectime' value='<? echo $maxexectime ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	</form>
 	<br><br><table cellpadding=0 cellspacing=0 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
