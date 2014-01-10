@@ -76,7 +76,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>Server name</td><td valign='top' align='left'><font color='blue'><a href='http://<? echo $getdata->servername ?>' target=_blank</a><? echo $getdata->servername;?></font></td></tr>
 	<tr><td valign='top' align='left'>Server Addr</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serveraddr;?></font></td></tr>
 	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><? echo $getdata->phpos;?></td></tr>
-	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><? echo $getdata->apacheversion;?></td></tr>
+	<tr><td valign='top' align='left'>Webserver type</td><td valign='top' align='left'><? echo $getdata->apacheversion;?></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Server load statistics</b></td></tr>
 	<tr><td valign='top' align='left'>Load now</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serverloadnow;?></td></tr>
