@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.0.8
+ * @version 1.0.9
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.0.8
+Version: 1.0.9
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -302,7 +302,10 @@ function mywebtonetperftest_plugin_all() {
 	$phpuname	= php_uname();
 	$memorylimit 	= ini_get("memory_limit");
 	$postmaxsize 	= ini_get("post_max_size");
-	$mysqlversion = $wpdb->get_var( "select version();" );
+	$uploadmaxsize 	= ini_get("upload_max_filesize");
+	$mysqlversion 	= $wpdb->get_var( "select version();" );
+	$maxexectime	= ini_get('max_execution_time');
+	$apacheversion  = apache_get_version();
 	//
 	// General information about server etc etc, we always show these		
 	//
@@ -310,12 +313,17 @@ function mywebtonetperftest_plugin_all() {
 	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center>\n";
         echo "<table>\n";
         echo "<tr><td valign='top'>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
-        echo "<tr><td valign='top'>PHP host information : <font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
-        echo "<tr><td valign='top'>PHP version : <font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP memory limit / Post max size: <font color='blue'><b>".$memorylimit." / ".$postmaxsize."</b></font></td></tr>\n";
-        echo "<tr><td valign='top'>Platform : <font color='blue'><b>".$phpos."</b></font></td></tr>\n";
-        echo "<tr><td valign='top'>MySQL version : <font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
-        echo "</table>\n";
+        echo "<tr><td valign='top'>PHP host information</td><td><font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
+        echo "<tr><td valign='top'>PHP version</td><td><font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP memory limit</td><td><font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP post max size</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP upload max size</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP maximum execution time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
+	if ($apacheversion != "") {
+		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
+	}
+        echo "<tr><td valign='top'>Platform</td><td><font color='blue'><b>".$phpos."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>MySQL version</td><td><font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
 	//
 	// Windows shouldn't give us the load average
 	//	
@@ -323,12 +331,11 @@ function mywebtonetperftest_plugin_all() {
 		echo "<tr><td valign='top'>Server load now:</td><td valign='top' align='right'><b>Unable to fetch load as windows is used for webserver (incompatible)</b></td></tr>\n";
 	} else {
 		$load= sys_getloadavg();
-	        echo "<table width=250>\n";
 		echo "<tr><td valign='top'>Server load now:</td><td valign='top' align='left'><font color='blue'><b>".sprintf("%6.2f",$load[0])."</b></td></tr>\n";
 		echo "<tr><td valign='top'>Server load avg. 5 minutes:</td><td valign='top' align='left'><font color='blue'><b>".sprintf("%6.2f",$load[1])."</b></td></tr>\n";
 		echo "<tr><td valign='top'>Server load avg. 15 minutes:</td><td valign='top' align='left'><font color='blue'><b>".sprintf("%6.2f",$load[2])."</b></td></tr>\n";	
-	        echo "</table>\n";
 	}	
+        echo "</table>\n";
 
         DoHeader();
 	$queryresult = DoQueryTest();
@@ -426,7 +433,7 @@ function ShowFooter() {
 function DoHeader() {
 	?>
 	<body onLoad="init()">
-	<div id="loading" style="position:absolute; width:100%; text-align:center; top:100px;">
+	<div id="loading" style="width:40%; text-align:center; margin-left:auto; margin-right:auto; margintop:10px; background-color: #5c87b2;">
 	<br><br><br><img src="<?php echo MYWEB_URL.'pleasewait.gif'; ?>" alt="">
 	<center><br><br><font face='Verdana,Arial'>Please wait while we perform some tests!
 	</div><script>

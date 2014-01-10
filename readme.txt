@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.8.0
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ inserts, selects, updates and deletes are performed in a seperate custom databas
 
 Network testing:
 The network is tested by fetching directly from googles CDN / apis network. Fetching from the google 
-apis network gives you the nearest server and will give more accurate results. We also fetch a small 1Mb 
+apis network gives you the nearest server, and will give more accurate results. We also fetch a small 1Mb 
 file from our servers as well in case google apis is down. The network tests are not yet shown in the 
 graphs, we are working on it :-)
  
@@ -75,6 +75,9 @@ Minor changes. Tested on WordPress 3.8.
 = 1.0.8 =
 Now with network testing tool
 
+= 1.0.9 =
+More PHP information + webserver type/version
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -100,4 +103,7 @@ Minor changes. Tested on WordPress 3.8.
 
 = 1.0.8 =
 Now with network testing tool
+
+= 1.0.9 =
+More PHP information + webserver type/version
 
