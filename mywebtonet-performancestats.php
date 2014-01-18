@@ -315,7 +315,11 @@ function mywebtonetperftest_plugin_all() {
 	$mysqlversion 	= $wpdb->get_var( "select version();" );
 	$maxexectime	= ini_get('max_execution_time');
 //	$apacheversion  = apache_get_version();
-	$apacheversion 	= "Test not implemented yet";
+
+	$apacheversion = (function_exists('apache_get_version')) ? apache_get_version() : ''; 
+	if ($apacheversion == "") {
+		$apacheversion 	= "Test not implemented yet";
+	}
 	//
 	// General information about server etc etc, we always show these		
 	//
