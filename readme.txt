@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.8.0
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,9 @@ Now with network testing tool
 = 1.0.9 =
 More PHP information + webserver type/version
 
+= 1.1.0 =
+Changed <?php to <? in all PHP files
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -107,3 +110,5 @@ Now with network testing tool
 = 1.0.9 =
 More PHP information + webserver type/version
 
+= 1.1.0 =
+Changed <?php to <? in all PHP files
