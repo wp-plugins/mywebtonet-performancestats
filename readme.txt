@@ -79,7 +79,7 @@ Now with network testing tool
 More PHP information + webserver type/version
 
 = 1.1.0 =
-Changed <?php to <? in all PHP files
+Removed apache_get_version() as it doesn't work on all platforms
 
 == Upgrade Notice ==
 
@@ -111,4 +111,4 @@ Now with network testing tool
 More PHP information + webserver type/version
 
 = 1.1.0 =
-Changed <?php to <? in all PHP files
+Removed apache_get_version() as it doesn't work on all platforms

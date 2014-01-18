@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package mywebtonet performance statistics
  * @version 1.1.0
@@ -314,7 +314,8 @@ function mywebtonetperftest_plugin_all() {
 	$uploadmaxsize 	= ini_get("upload_max_filesize");
 	$mysqlversion 	= $wpdb->get_var( "select version();" );
 	$maxexectime	= ini_get('max_execution_time');
-	$apacheversion  = apache_get_version();
+//	$apacheversion  = apache_get_version();
+	$apacheversion 	= "Not implemented yet";
 	//
 	// General information about server etc etc, we always show these		
 	//
