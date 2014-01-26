@@ -519,9 +519,9 @@ function DoMySQL() {
 		$time_start = microtime(true);
 		$dotest = $wpdb->query( "$mysqltests[$i]" );	
 		$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
-		if ($result < 0.01) {
+		if ($result < 0.02) {
 				//
-				// trigger MySQL error, something is wrong..., noone has a result at 0.00, so the MySQL server probably crashed
+				// trigger MySQL error, something is wrong..., noone has a result less than 0.02, so the MySQL server probably crashed
 				//	
 				$mysqlerror = 1;
 				$result     = 99.99;			
@@ -538,6 +538,7 @@ function DoMySQL() {
 	if (!$mysqlerror) {
 		echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 	} else {
+		$MySQLtotaltime = 99.99;
 		echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>MySQL test error</b></font></td></tr></table>\n";	
 	}		
 
