@@ -1,24 +1,24 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.1.1
+ * @version 1.1.2
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.1
+Version: 1.1.2
 Author URI: http://www.mywebtonet.com 
 */
 
 $mysqlquerydata = str_repeat ("X" , 1000 );
 $ourdatamysql53 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.48);	
 $ourdatamysql54 = array("Query test" => 0.32,"MySQL 1" => 3.53,"MySQL 2" => 1.13,"MySQL 3" => 0.50);	
-$ourdatamysql55 = array("Query test" => 0.30,"MySQL 1" => 3.52,"MySQL 2" => 1.10,"MySQL 3" => 0.49);	
-$ourdataphp53 = array("PHP 1" => 0.35,"PHP 2" => 0.71,"PHP 3" => 0.39,"PHP 4" => 0.65);	
-$ourdataphp54 = array("PHP 1" => 0.29,"PHP 2" => 0.64,"PHP 3" => 0.29,"PHP 4" => 0.37);	
-$ourdataphp55 = array("PHP 1" => 0.28,"PHP 2" => 0.61,"PHP 3" => 0.24,"PHP 4" => 0.31);	
+$ourdatamysql55 = array("Query test" => 0.31,"MySQL 1" => 3.51,"MySQL 2" => 1.11,"MySQL 3" => 0.49);	
+$ourdataphp53 = array("PHP 1" => 0.34,"PHP 2" => 0.70,"PHP 3" => 0.40,"PHP 4" => 0.64);	
+$ourdataphp54 = array("PHP 1" => 0.30,"PHP 2" => 0.63,"PHP 3" => 0.30,"PHP 4" => 0.36);	
+$ourdataphp55 = array("PHP 1" => 0.29,"PHP 2" => 0.62,"PHP 3" => 0.24,"PHP 4" => 0.30);	
 $runquerycount = 200;
 
 if ( !defined('ABSPATH') ) {
@@ -171,30 +171,30 @@ function mywebtonetperftest_showlist() {
 	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
 	<?
-	echo "<tr><td>Saturday 23rd November 2013 20:36:35</td>
+	echo "<tr><td>Sunday 26nd January 2014 07:31:32</td>
 		<td>MyWebToNet PHP 5.3 server</td>
-		<td>81.19.232.65</td><td>5.3.27</td>
-		<td>5.6.14</td>
+		<td>81.19.232.65</td><td>5.3.28</td>
+		<td>5.6.15</td>
 		<td>$mysqltotal53</td>
 		<td>$phptotal53</td>
 		<td><font color='blue'><b>$totaltime53</b></font></td>
 		<td><font color='blue'><b>$phpperformanceindex53</b></font></td>
 		<td><font color='blue'><b>$mysqlperformanceindex53</b></font></td>
 		</tr>";
-	echo "<tr><td>Saturday 23rd November 2013 20:40:12</td>
+	echo "<tr><td>Sunday 26nd January 2014 07:33:08</td>
 		<td>MyWebToNet PHP 5.4 server</td>
-		<td>81.19.232.55</td><td>5.4.22</td>
-		<td>5.6.14</td>
+		<td>81.19.232.55</td><td>5.4.24</td>
+		<td>5.6.15</td>
 		<td>$mysqltotal54</td>
 		<td>$phptotal54</td>
 		<td><font color='blue'><b>$totaltime54</b></font></td>
 		<td><font color='blue'><b>$phpperformanceindex54</b></font></td>
 		<td><font color='blue'><b>$mysqlperformanceindex54</b></font></td>
 		</tr>";
-	echo "<tr><td>Saturday 23rd November 2013 20:41:23</td>
+	echo "<tr><td>Sunday 26nd January 2014 07:36:08</td>
 		<td>MyWebToNet PHP 5.5 server</td>
-		<td>81.7.161.141</td><td>5.5.6</td>
-		<td>5.6.14</td>
+		<td>81.7.161.141</td><td>5.5.8</td>
+		<td>5.6.15</td>
 		<td>$mysqltotal55</td>
 		<td>$phptotal55</td>
 		<td><font color='blue'><b>$totaltime55</b></font></td>
@@ -519,6 +519,13 @@ function DoMySQL() {
 		$time_start = microtime(true);
 		$dotest = $wpdb->query( "$mysqltests[$i]" );	
 		$result = sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));	
+		if ($result < 0.01) {
+				//
+				// trigger MySQL error, something is wrong..., noone has a result at 0.00, so the MySQL server probably crashed
+				//	
+				$mysqlerror = 1;
+				$result     = 99.99;			
+		}	
 		$mysqlresults[]=$result;
 		$MySQLtotaltime = $MySQLtotaltime + $result;
 		echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>$mysqltests[$i]</b></font></td><td valign='top' width=22%> :".sprintf("%6.2f",$result)." seconds</td></tr>\n";	
@@ -528,7 +535,11 @@ function DoMySQL() {
 	for ($i = 0; $i < $count; $i++) {
 		$mysqltemp = $mysqltemp.",".$mysqlresults[$i];
 	}	
-	echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
+	if (!$mysqlerror) {
+		echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
+	} else {
+		echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>MySQL test error</b></font></td></tr></table>\n";	
+	}		
 
 }
 

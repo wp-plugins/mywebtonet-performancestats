@@ -1,14 +1,14 @@
 === Plugin Name ===
 Contributors: mywebtonet
-Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
+Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
-Tested up to: 3.8.0
-Stable tag: 1.1.1
+Tested up to: 3.8.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With this plugin you can "dyno tests" the performance of your PHP and MySQL servers and run a network test to determine the speed of your webservers network.
+With this plugin you can "dyno tests" the performance of your PHP and MySQL servers and run a network test to determine the speed of your network.
 
 == Description ==
 
@@ -84,6 +84,10 @@ Minor update
 = 1.1.1 =
 Only calling apache_get_version() if function exists
 
+= 1.1.2 =
+Some servers reports one or more of the MySQL tests at 0.00 seconds, whichs
+is impossible. This now triggers an error.
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -118,3 +122,7 @@ Minor update
 
 = 1.1.1 =
 Only calling apache_get_version() if function exists
+
+= 1.1.2 =
+Some servers reports one or more of the MySQL tests at 0.00 seconds, whichs
+is impossible. This now triggers an error.
