@@ -85,7 +85,7 @@ Minor update
 Only calling apache_get_version() if function exists
 
 = 1.1.2 =
-Some servers reports one or more of the MySQL tests at 0.00 seconds, whichs
+Some servers reports one or more of the MySQL tests at 0.00 seconds, which
 is impossible. This now triggers an error.
 
 == Upgrade Notice ==
@@ -124,5 +124,5 @@ Minor update
 Only calling apache_get_version() if function exists
 
 = 1.1.2 =
-Some servers reports one or more of the MySQL tests at 0.00 seconds, whichs
+Some servers reports one or more of the MySQL tests at 0.00 seconds, which
 is impossible. This now triggers an error.
