@@ -8,21 +8,21 @@ Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With this plugin you can "dyno tests" the performance of your PHP and MySQL servers and run a network test to determine the speed of your network.
+With this plugin you can "dyno test" the your PHP and MySQL servers and run a network test to determine the speed of your network.
 
 == Description ==
 
 CPU performance testing:
 This plugin does various calculations and string manipulations on your PHP webserver 
 and your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
-inserts, selects, updates and deletes are performed in a seperate custom database table 
+inserts, selects, updates and deletes are performed in a separate custom database table 
 (we do not use your WordPress tables for this). 
 
 Network testing:
-The network is tested by fetching directly from googles CDN / apis network. Fetching from the google 
+The network is tested by fetching directly from Google's CDN / apis network. Fetching from the google 
 apis network gives you the nearest server, and will give more accurate results. We also fetch a small 1Mb 
-file from our servers as well in case google apis is down. The network tests are not yet shown in the 
-graphs, we are working on it :-)
+file from our servers as well in case the Google apis is down. The network tests are not yet shown in the 
+graphs, we are working on this :-)
  
 Results:
 After the sequence of tests has finished, the results will be displayed for you to evaluate. Typical 
@@ -33,8 +33,8 @@ TCP/IP connection to the MySQL server is made instead of a local socket connecti
 Generally speaking, the faster this plugin runs, the faster your website will run.
 
 There are many factors that will determine how fast your website will run. This plugin does not test 
-for how many hits a second your provider allows to your website, filesystem performance is not tested 
-either. Use it as a performance test on how fast a CPU your provider has allocated to your webserver 
+for how many hits a second your provider allows to your website, file system performance is not tested 
+either. Use it as a performance test to assess how fast a CPU your provider has allocated to your webserver 
 and your MySQL database backend. 
 
 Share with your friends, let's start a competition and see who is the fastests :-)
