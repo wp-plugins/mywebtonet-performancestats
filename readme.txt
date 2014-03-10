@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.8.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ Only calling apache_get_version() if function exists
 Some servers reports one or more of the MySQL tests at 0.00 seconds, which
 is impossible. This now triggers an error.
 
+= 1.1.3 =
+Added path and gateway interface
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -126,3 +129,7 @@ Only calling apache_get_version() if function exists
 = 1.1.2 =
 Some servers reports one or more of the MySQL tests at 0.00 seconds, which
 is impossible. This now triggers an error.
+
+= 1.1.3 =
+Added path and gateway interface
+

@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.1.2
+ * @version 1.1.3
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.2
+Version: 1.1.3
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -304,6 +304,10 @@ function mywebtonetperftest_plugin_all() {
 	global $ourdatamysql55;
 	global $ourdataphp55;
 	//	
+	$getcwdpath	= getcwd();
+	$servermode	= $_SERVER['GATEWAY_INTERFACE'];
+	//
+	
 	$servername	= $_SERVER['SERVER_NAME'];
 	$serveraddr	= $_SERVER['SERVER_ADDR'];
 	$phpversion	= PHP_VERSION;
@@ -337,6 +341,11 @@ function mywebtonetperftest_plugin_all() {
 		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
 	}
         echo "<tr><td valign='top'>Platform</td><td><font color='blue'><b>".$phpos."</b></font></td></tr>\n";
+
+        echo "<tr><td valign='top'>Gateway interface</td><td><font color='blue'><b>".$servermode."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Path to files</td><td><font color='blue'><b>".$getcwdpath."</b></font></td></tr>\n";
+
+
         echo "<tr><td valign='top'>MySQL version</td><td><font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
 	//
 	// Windows shouldn't give us the load average
