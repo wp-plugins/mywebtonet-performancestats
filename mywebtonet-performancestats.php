@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.1.3
+ * @version 1.1.2
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.3
+Version: 1.1.2
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -324,6 +324,13 @@ function mywebtonetperftest_plugin_all() {
 	if ($apacheversion == "") {
 		$apacheversion 	= "Test not implemented yet";
 	}
+
+	$loadedmodules = (function_exists('apache_get_modules')) ? apache_get_modules() : ''; 
+	if ($loadedmodules == "") {
+		$loadedmodules 	= "Test not implemented yet";
+	}
+
+
 	//
 	// General information about server etc etc, we always show these		
 	//
@@ -339,6 +346,15 @@ function mywebtonetperftest_plugin_all() {
 	echo "<tr><td valign='top'>PHP max_execution_time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
 	if ($apacheversion != "") {
 		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
+	}
+	if ($loadedmodules != "") {
+		echo "<tr><td valign='top'>Loaded webserver modules</td><td style='word-wrap:'><font color='blue'><b>";
+		$arrlength=count($loadedmodules);
+		for($x=0;$x<$arrlength;$x++)
+		  {
+		    echo $loadedmodules[$x]." ";
+		  }  	
+		  echo "</td></tr>\n";
 	}
         echo "<tr><td valign='top'>Platform</td><td><font color='blue'><b>".$phpos."</b></font></td></tr>\n";
 
