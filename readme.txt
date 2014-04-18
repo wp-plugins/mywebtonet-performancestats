@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.9.0
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,10 @@ is impossible. This now triggers an error.
 = 1.1.3 =
 Added path and gateway interface
 
+= 1.1.4 =
+Added missing ?> in main script, for some reason it doesnt work with all php versions without it.
+
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -132,4 +136,7 @@ is impossible. This now triggers an error.
 
 = 1.1.3 =
 Added path and gateway interface
+
+= 1.1.4 =
+Added missing ?> in main script, for some reason it doesnt work with all php versions without it.
 

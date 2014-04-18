@@ -1,14 +1,14 @@
 <?php
 /**
  * @package mywebtonet performance statistics
- * @version 1.1.3
+ * @version 1.1.4
  */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.3
+Version: 1.1.4
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -670,3 +670,4 @@ function test_IfElse($count = 10000000) {
 	}
 	return sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));
 }	
+?>
