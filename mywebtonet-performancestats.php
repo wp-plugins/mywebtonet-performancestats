@@ -628,15 +628,11 @@ function test_Network() {
 	//
 	// get hostnames in DNS cache
 	//
-        $dummy = file_get_contents('http://www.webhosting.dk/1mbfile');
+        $dummy = file_get_contents('http://www.mywebtonet.com/1mbfile');
         $dummy = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
-	$time_start = microtime(true);
 	//
-        // at least we have some data in case google is down
-	//        
-        $data = file_get_contents('http://www.webhosting.dk/1mbfile');
-        //
-        $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
+	$time_start = microtime(true);
+	$data = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
         $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
         $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
         $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
@@ -645,11 +641,22 @@ function test_Network() {
 	$time_end = microtime(true) - $time_start;
 	$lenfile = strlen($data);
 	$mbps = sprintf('%.2f', (($lenfile * 8) / 1024 / 1024) / $time_end);
+	//	
+	// again, up against our servers in Europe
+	//
+	$whtime_start = microtime(true);
+	$whdata = file_get_contents('http://www.mywebtonet.com/1mbfile');
+    	$whtime_end = microtime(true) - $whtime_start;
+	$whlenfile = strlen($whdata);
+	$whmbps = sprintf('%.2f', (($lenfile * 8) / 1024 / 1024) / $whtime_end);
+	//
         echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><B>Network test:</b></td></tr>\n";
-	echo "<tr><td valign='top' width=20%>Time to perform: </td><td valign='top' width=58%><font color='blue'><b>Fetch data from nearest google CDN point</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Mbps</td></tr>\n";	
+	echo "<tr><td valign='top' width=20%>Network test 1: </td><td valign='top' width=58%><font color='blue'><b>Fetch data from nearest google CDN point</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Mbps</td></tr>\n";	
+	echo "<tr><td valign='top' width=20%>Network test 2: </td><td valign='top' width=58%><font color='blue'><b>Fetch data from our servers in Europe at http://www.mywebtonet.com</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $whmbps</b></font> Mbps</td></tr>\n";
 	echo "</table>\n";
-	return $mbps;
+	$xresult = sprintf("%.2f",$mbps+$whmbps);
+	return $xresult;
 }
 
 function test_Loops($count = 10000000) {
