@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.9.1
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,8 @@ Added path and gateway interface
 = 1.1.4 =
 Added missing ?> in main script, for some reason it doesnt work with all php versions without it.
 
+= 1.1.5 =
+Minor code changes + split the network test into two seperate tests
 
 == Upgrade Notice ==
 
@@ -140,3 +142,5 @@ Added path and gateway interface
 = 1.1.4 =
 Added missing ?> in main script, for some reason it doesnt work with all php versions without it.
 
+= 1.1.5 =
+Minor code changes + split the network test into two seperate tests
