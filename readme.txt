@@ -9,7 +9,6 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 With the performance test plugin you can test the CPU and MySQL speed on your webserver and your MySQL server. 
-The plugin also performs a network test to determine how fast your uplink network connection is on your webserver.
 
 == Description ==
 
