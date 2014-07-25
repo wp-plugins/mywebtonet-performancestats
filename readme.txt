@@ -8,7 +8,8 @@ Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With this plugin you can "dyno test" the your PHP and MySQL servers and run a network test to determine the speed of your network.
+With the performance test plugin you can test the CPU and MySQL speed on your webserver and your MySQL server. 
+The plugin also performs a network test to determine how fast your uplink network connection is on your webserver.
 
 == Description ==
 
@@ -19,7 +20,7 @@ inserts, selects, updates and deletes are performed in a separate custom databas
 (we do not use your WordPress tables for this). 
 
 Network testing:
-The network is tested by fetching directly from Google's CDN / apis network. Fetching from the google 
+The network is tested by fetching directly from Google's CDN / apis network. Fetching from the Google 
 apis network gives you the nearest server, and will give more accurate results. We also fetch a small 1Mb 
 file from our servers as well in case the Google apis is down. The network tests are not yet shown in the 
 graphs, we are working on this :-)
