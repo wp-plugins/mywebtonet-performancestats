@@ -677,4 +677,3 @@ function test_IfElse($count = 10000000) {
 	}
 	return sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));
 }	
-?>
