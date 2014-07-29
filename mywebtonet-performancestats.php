@@ -49,7 +49,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	?>
 	<center>
 	
-	<?
+	<?php
 	if ($showtype == "fast") {
 		$headertext = "Best time";
 		$getdata = $wpdb->get_results("select sum(mysql1+mysql2+mysql3+queryresult) as mysqlresult,sum(php1+php2+php3+php4) as phpresult,uniqid, servername, serveraddr, memorylimit,phpversion,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,deleteable,DATE_FORMAT(dt, '%W %D %M %Y %T') as tt,phpuname,queryresult,networktest,maxexectime,apacheversion,uploadmaxsize from $tableprefix where deleteable=1 group by uniqid order by mysqlresult asc limit 1;");
@@ -68,51 +68,51 @@ function mywebtonetperftest_showfromdb($showtype) {
 
 	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
-	<br><br><h3><? echo $headertext?></h3>
+	<br><br><h3><?php echo $headertext?></h3>
 	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
-	<tr><td valign='top' align='left'>Time of test</td><td valign='top' align='left'><font color='blue'><a href='http://<? echo $getdata->servername ?>' target=_blank</a><? echo $getdata->tt;?></font></td></tr>
-	<tr><td valign='top' align='left'>Server name</td><td valign='top' align='left'><font color='blue'><a href='http://<? echo $getdata->servername ?>' target=_blank</a><? echo $getdata->servername;?></font></td></tr>
-	<tr><td valign='top' align='left'>Server Addr</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serveraddr;?></font></td></tr>
-	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><? echo $getdata->phpos;?></td></tr>
-	<tr><td valign='top' align='left'>Webserver type</td><td valign='top' align='left'><? echo $getdata->apacheversion;?></td></tr>
+	<tr><td valign='top' align='left'>Time of test</td><td valign='top' align='left'><font color='blue'><a href='http://<?php echo $getdata->servername ?>' target=_blank</a><?php echo $getdata->tt;?></font></td></tr>
+	<tr><td valign='top' align='left'>Server name</td><td valign='top' align='left'><font color='blue'><a href='http://<?php echo $getdata->servername ?>' target=_blank</a><?php echo $getdata->servername;?></font></td></tr>
+	<tr><td valign='top' align='left'>Server Addr</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->serveraddr;?></font></td></tr>
+	<tr><td valign='top' align='left'>Host OS</td><td valign='top' align='left'><?php echo $getdata->phpos;?></td></tr>
+	<tr><td valign='top' align='left'>Webserver type</td><td valign='top' align='left'><?php echo $getdata->apacheversion;?></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Server load statistics</b></td></tr>
-	<tr><td valign='top' align='left'>Load now</td><td valign='top' align='left'><font color='blue'><? echo $getdata->serverloadnow;?></td></tr>
-	<tr><td valign='top' align='left'>Load 5 min</td><td valign='top' align='left'><? echo $getdata->serverload5;?></td></tr>
-	<tr><td valign='top' align='left'>Load 15 min</td><td valign='top' align='left'><? echo $getdata->serverload15;?></td></tr>
+	<tr><td valign='top' align='left'>Load now</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->serverloadnow;?></td></tr>
+	<tr><td valign='top' align='left'>Load 5 min</td><td valign='top' align='left'><?php echo $getdata->serverload5;?></td></tr>
+	<tr><td valign='top' align='left'>Load 15 min</td><td valign='top' align='left'><?php echo $getdata->serverload15;?></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>PHP statistics</b></td></tr>
-	<tr><td valign='top' align='left'>PHP uname</td><td valign='top' align='left'><? echo $getdata->phpuname;?></td></tr>
-	<tr><td valign='top' align='left'>PHP version</td><td valign='top' align='left'><? echo $getdata->phpversion;?></td></tr>
-	<tr><td valign='top' align='left'>PHP memory limit</td><td valign='top' align='left'><font color='blue'><? echo $getdata->memorylimit;?></td></tr>
-	<tr><td valign='top' align='left'>PHP post_max_size</td><td valign='top' align='left'><font color='blue'><? echo $getdata->postmaxsize;?></td></tr>
-	<tr><td valign='top' align='left'>PHP upload_max_filesize</td><td valign='top' align='left'><font color='blue'><? echo $getdata->uploadmaxsize;?></td></tr>
-	<tr><td valign='top' align='left'>PHP max_execution_time</td><td valign='top' align='left'><font color='blue'><? echo $getdata->maxexectime;?></td></tr>
-	<tr><td valign='top' align='left'>PHP test 1</td><td valign='top' align='left'><? echo $getdata->php1;?></td></tr>
-	<tr><td valign='top' align='left'>PHP test 2</td><td valign='top' align='left'><? echo $getdata->php2;?></td></tr>
-	<tr><td valign='top' align='left'>PHP test 3</td><td valign='top' align='left'><? echo $getdata->php3;?></td></tr>
-	<tr><td valign='top' align='left'>PHP test 4</td><td valign='top' align='left'><? echo $getdata->php4;?></td></tr>
-	<tr><td valign='top' align='left'>PHP total time</td><td valign='top' align='left'><? echo sprintf("<font color='blue'><b>%10.2f</b>",$getdata->phpresult);?></td></tr>
-	<tr><td valign='top' align='left'>PHP performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/($getdata->phpresult));?></b></font></td></tr>
+	<tr><td valign='top' align='left'>PHP uname</td><td valign='top' align='left'><?php echo $getdata->phpuname;?></td></tr>
+	<tr><td valign='top' align='left'>PHP version</td><td valign='top' align='left'><?php echo $getdata->phpversion;?></td></tr>
+	<tr><td valign='top' align='left'>PHP memory limit</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->memorylimit;?></td></tr>
+	<tr><td valign='top' align='left'>PHP post_max_size</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->postmaxsize;?></td></tr>
+	<tr><td valign='top' align='left'>PHP upload_max_filesize</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->uploadmaxsize;?></td></tr>
+	<tr><td valign='top' align='left'>PHP max_execution_time</td><td valign='top' align='left'><font color='blue'><?php echo $getdata->maxexectime;?></td></tr>
+	<tr><td valign='top' align='left'>PHP test 1</td><td valign='top' align='left'><?php echo $getdata->php1;?></td></tr>
+	<tr><td valign='top' align='left'>PHP test 2</td><td valign='top' align='left'><?php echo $getdata->php2;?></td></tr>
+	<tr><td valign='top' align='left'>PHP test 3</td><td valign='top' align='left'><?php echo $getdata->php3;?></td></tr>
+	<tr><td valign='top' align='left'>PHP test 4</td><td valign='top' align='left'><?php echo $getdata->php4;?></td></tr>
+	<tr><td valign='top' align='left'>PHP total time</td><td valign='top' align='left'><?php echo sprintf("<font color='blue'><b>%10.2f</b>",$getdata->phpresult);?></td></tr>
+	<tr><td valign='top' align='left'>PHP performance Index</td><td valign='top' align='left'><font color='blue'><b><?php echo sprintf("%10.0f",10000/($getdata->phpresult));?></b></font></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>MySQL statistics</b></td></tr>
-	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><? echo $getdata->mysqlversion;?></td>
-	<tr><td valign='top' align='left'>MySQL Query</td><td valign='top' align='left'><? echo $getdata->queryresult;?> seconds (<b><? echo $cresult ?></b> / second)</td>
-	<tr><td valign='top' align='left'>MySQL 1</td><td valign='top' align='left'><? echo $getdata->mysql1;?></td></tr>
-	<tr><td valign='top' align='left'>MySQL 2</td><td valign='top' align='left'><? echo $getdata->mysql2;?></td></tr>
-	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><? echo $getdata->mysql3;?></td></tr>
-	<tr><td valign='top' align='left'>MySQL total time</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->mysqlresult;?></b></td></tr>
-	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
+	<tr><td valign='top' align='left'>MySQL version</td><td valign='top' align='left'><?php echo $getdata->mysqlversion;?></td>
+	<tr><td valign='top' align='left'>MySQL Query</td><td valign='top' align='left'><?php echo $getdata->queryresult;?> seconds (<b><?php echo $cresult ?></b> / second)</td>
+	<tr><td valign='top' align='left'>MySQL 1</td><td valign='top' align='left'><?php echo $getdata->mysql1;?></td></tr>
+	<tr><td valign='top' align='left'>MySQL 2</td><td valign='top' align='left'><?php echo $getdata->mysql2;?></td></tr>
+	<tr><td valign='top' align='left'>MySQL 3</td><td valign='top' align='left'><?php echo $getdata->mysql3;?></td></tr>
+	<tr><td valign='top' align='left'>MySQL total time</td><td valign='top' align='left'><font color='blue'><b><?php echo $getdata->mysqlresult;?></b></td></tr>
+	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><?php echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Network test</b></td></tr>
-	<tr><td valign='top' align='left'>Fetch data from nearest google CDN point</td><td valign='top' align='left'><font color='blue'><b><? echo $getdata->networktest;?></b></font> Mbps</td></font>
+	<tr><td valign='top' align='left'>Fetch data from nearest google CDN point</td><td valign='top' align='left'><font color='blue'><b><?php echo $getdata->networktest;?></b></font> Mbps</td></font>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Summary</b></td></tr>
-	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><? echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
+	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><?php echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
 	</table>
-	<?
+	<?php
 		$datamysql = array("Query result" => $getdata->queryresult,"MySQL 1" => $getdata->mysql1,"MySQL 2" => $getdata->mysql2,"MySQL 3" => $getdata->mysql3);	
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
 
@@ -132,7 +132,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 		</td>
 	</td></tr>
 	</table>
-	<?	
+	<?php	
 }
 
 
@@ -170,7 +170,7 @@ function mywebtonetperftest_showlist() {
 	<br>
 	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
-	<?
+	<?php
 	echo "<tr><td>Sunday 26nd January 2014 07:31:32</td>
 		<td>MyWebToNet PHP 5.3 server</td>
 		<td>81.19.232.65</td><td>5.3.28</td>
@@ -216,7 +216,7 @@ function mywebtonetperftest_showlist() {
 	}
 	?>
 	</table>	
-	<?
+	<?php
 }
 
 
@@ -409,32 +409,32 @@ function mywebtonetperftest_plugin_all() {
 	</td></tr></table>
 	<br>
 	<FORM name="myform" METHOD="POST" ACTION="http://gather.webhosting.dk/cgi-bin/mywebtonet-performancestatsresults.pl" accept-charset="ISO-8859-1" target=_blank>
-	<input type='hidden' name='md5time' value='<? echo $md5time ?>'>
-	<input type='hidden' name='servername' value='<? echo $servername ?>'>
-	<input type='hidden' name='serveraddr' value='<? echo $serveraddr ?>'>
-	<input type='hidden' name='phpversion' value='<? echo $phpversion ?>'>
-	<input type='hidden' name='phpos' value='<? echo $phpos ?>'>
-	<input type='hidden' name='mathresult' value='<? echo $testmathresult ?>'>
-	<input type='hidden' name='stringresult' value='<? echo $teststringresult ?>'>
-	<input type='hidden' name='testloopresult' value='<? echo $testloopresult ?>'>
-	<input type='hidden' name='ifelseresult' value='<? echo $testifelseresult ?>'>
-	<input type='hidden' name='queryresult' value='<? echo $queryresult ?>'>
-	<input type='hidden' name='mysqlresults' value='<? echo $mysqltemp ?>'>
-	<input type='hidden' name='phpmemorylimit' value='<? echo $memorylimit ?>'>
-	<input type='hidden' name='postmaxsize' value='<? echo $postmaxsize ?>'>
-	<input type='hidden' name='phpuname' value='<? echo $phpuname ?>'>
-	<input type='hidden' name='loadnow' value='<? echo $load[0] ?>'>
-	<input type='hidden' name='load5' value='<? echo $load[1] ?>'>
-	<input type='hidden' name='load15' value='<? echo $load[2] ?>'>
-	<input type='hidden' name='networktest' value='<? echo $networktest ?>'>
-	<input type='hidden' name='mysqlversion' value='<? echo $mysqlversion ?>'>
-	<input type='hidden' name='apacheversion' value='<? echo $apacheversion ?>'>
-	<input type='hidden' name='uploadmaxsize' value='<? echo $uploadmaxsize ?>'>
-	<input type='hidden' name='maxexectime' value='<? echo $maxexectime ?>'>
+	<input type='hidden' name='md5time' value='<?php echo $md5time ?>'>
+	<input type='hidden' name='servername' value='<?php echo $servername ?>'>
+	<input type='hidden' name='serveraddr' value='<?php echo $serveraddr ?>'>
+	<input type='hidden' name='phpversion' value='<?php echo $phpversion ?>'>
+	<input type='hidden' name='phpos' value='<?php echo $phpos ?>'>
+	<input type='hidden' name='mathresult' value='<?php echo $testmathresult ?>'>
+	<input type='hidden' name='stringresult' value='<?php echo $teststringresult ?>'>
+	<input type='hidden' name='testloopresult' value='<?php echo $testloopresult ?>'>
+	<input type='hidden' name='ifelseresult' value='<?php echo $testifelseresult ?>'>
+	<input type='hidden' name='queryresult' value='<?php echo $queryresult ?>'>
+	<input type='hidden' name='mysqlresults' value='<?php echo $mysqltemp ?>'>
+	<input type='hidden' name='phpmemorylimit' value='<?php echo $memorylimit ?>'>
+	<input type='hidden' name='postmaxsize' value='<?php echo $postmaxsize ?>'>
+	<input type='hidden' name='phpuname' value='<?php echo $phpuname ?>'>
+	<input type='hidden' name='loadnow' value='<?php echo $load[0] ?>'>
+	<input type='hidden' name='load5' value='<?php echo $load[1] ?>'>
+	<input type='hidden' name='load15' value='<?php echo $load[2] ?>'>
+	<input type='hidden' name='networktest' value='<?php echo $networktest ?>'>
+	<input type='hidden' name='mysqlversion' value='<?php echo $mysqlversion ?>'>
+	<input type='hidden' name='apacheversion' value='<?php echo $apacheversion ?>'>
+	<input type='hidden' name='uploadmaxsize' value='<?php echo $uploadmaxsize ?>'>
+	<input type='hidden' name='maxexectime' value='<?php echo $maxexectime ?>'>
 	<font face="Verdana,Arial" size="1"><INPUT TYPE=submit VALUE="Submit results">
 	</form>
 	<br><br><table cellpadding=0 cellspacing=0 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
-	<?
+	<?php
 		$datamysql = array("Query result" => $queryresult,"MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
 	?>
@@ -452,7 +452,7 @@ function mywebtonetperftest_plugin_all() {
 			</table>		
 		</td>
 	</table><br>		
-	<?
+	<?php
 	ShowFooter();
 }
 
@@ -468,7 +468,7 @@ function ShowFooter() {
 	Plugin URL <a href='http://wordpress.org/plugins/mywebtonet-performancestats/' target=_blank><b>http://wordpress.org/plugins/mywebtonet-performancestats/</b></a>
 	<br><br>
 	Script made by <a href='http://www.mywebtonet.com' target=_blank><b>http://www.mywebtonet.com</b></a>&nbsp;&nbsp;<a href='http://www.webhosting.dk' target=_blank><b>http://www.webhosting.dk</b></a>
-<?			
+<?php			
 
 }
 
@@ -496,7 +496,7 @@ function DoHeader() {
 		}
 	</script>
 	</center>
-	<?
+	<?php
 	flush();
 }
 
@@ -677,4 +677,3 @@ function test_IfElse($count = 10000000) {
 	}
 	return sprintf("%10.2f",number_format(microtime(true) - $time_start, 3));
 }	
-?>
