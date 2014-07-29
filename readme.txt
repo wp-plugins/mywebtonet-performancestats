@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 3.9.1
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ With the performance test plugin you can test the CPU and MySQL speed on your we
 
 CPU performance testing:
 This plugin does various calculations and string manipulations on your PHP webserver 
-and your MySQL backend server. To further test the MySQL server, a sequence of MySQL 
+and your MySQL database server. To further test the MySQL server, a sequence of MySQL 
 inserts, selects, updates and deletes are performed in a separate custom database table 
 (we do not use your WordPress tables for this). 
 
@@ -25,12 +25,11 @@ file from our servers as well in case the Google apis is down. The network tests
 graphs, we are working on this :-)
  
 Results:
-After the sequence of tests has finished, the results will be displayed for you to evaluate. Typical 
-results for the MySQL query test is 0.05-0.25 seconds, but only if a MySQL socket connection is used. 
-Web hosting providers with dedicated servers (like us) will show a slower time/queries per second, as a 
-TCP/IP connection to the MySQL server is made instead of a local socket connection. 
-
-Generally speaking, the faster this plugin runs, the faster your website will run.
+After the sequence of tests has finished, the results will be displayed for you to evaluate. MySQL results can
+vary depending on the type of connection your webserver has to the MySQL server. If a "local socket" connection
+is used a typical result for the MySQL query test is 0.05-0.25 seconds. Web hosting providers with dedicated MySQL 
+servers will show a slower time/queries per second, as a TCP/IP connection to the MySQL server is made instead of 
+a local socket connection. 
 
 There are many factors that will determine how fast your website will run. This plugin does not test 
 for how many hits a second your provider allows to your website, file system performance is not tested 
@@ -97,6 +96,10 @@ Added missing ?> in main script, for some reason it doesnt work with all php ver
 = 1.1.5 =
 Minor code changes + split the network test into two seperate tests
 
+= 1.1.6 =
+We have done some minor code changes as some webservers require <?php instead of just <?
+
+
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -144,3 +147,6 @@ Added missing ?> in main script, for some reason it doesnt work with all php ver
 
 = 1.1.5 =
 Minor code changes + split the network test into two seperate tests
+
+= 1.1.6 =
+We have done some minor code changes as some webservers require <?php instead of just <?
