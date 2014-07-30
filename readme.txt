@@ -97,7 +97,13 @@ Added missing ?> in main script, for some reason it doesnt work with all php ver
 Minor code changes + split the network test into two seperate tests
 
 = 1.1.6 =
-We have done some minor code changes as some webservers require <?php instead of just <?
+We have done some minor code changes as some webservers require 
+
+<?php 
+
+instead of just 
+
+<?
 
 
 == Upgrade Notice ==
@@ -149,4 +155,10 @@ Added missing ?> in main script, for some reason it doesnt work with all php ver
 Minor code changes + split the network test into two seperate tests
 
 = 1.1.6 =
-We have done some minor code changes as some webservers require <?php instead of just <?
+We have done some minor code changes as some webservers require 
+
+<?php 
+
+instead of just 
+
+<?
