@@ -68,7 +68,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 
 	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
-	<br><br><h3><?php echo $headertext?></h3>
+	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>		
 	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
@@ -130,6 +130,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 			</tr>	
 			</table>		
 		</td>
+		
 	</td></tr>
 	</table>
 	<?php	
@@ -167,8 +168,8 @@ function mywebtonetperftest_showlist() {
 	<br>
 	P.I = PHP performance Index<br>
 	M.I = MySQL performance Index<br>
-	<br>
-	<table width='90%' border=1 cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
+	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
+	<table width='90%' border=1 cellpadding=1 cellspacing=1 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
 	<?php
 	echo "<tr><td>Sunday 26nd January 2014 07:31:32</td>
@@ -334,7 +335,10 @@ function mywebtonetperftest_plugin_all() {
 	//
 	// General information about server etc etc, we always show these		
 	//
-	echo "<br>\n";
+//	echo "<br>\n";
+	?>
+	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
+	<?php
 	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center>\n";
         echo "<table>\n";
         echo "<tr><td valign='top'>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
