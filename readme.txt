@@ -4,7 +4,7 @@ Plugin URI: http://www.mywebtonet.com/files/wordpressplugins
 Tags: benchmark, php, mysql, performance, testing, speed, dynotest, query tester
 Requires at least: 3.2.0
 Tested up to: 4.1.1
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,8 @@ instead of just
 
 <?
 
+= 1.1.7 =
+Minor code corrections
 
 == Upgrade Notice ==
 
@@ -162,3 +164,6 @@ We have done some minor code changes as some webservers require
 instead of just 
 
 <?
+
+= 1.1.7 =
+Minor code corrections

@@ -1,14 +1,14 @@
 <?php
-/**
+/*
  * @package mywebtonet performance statistics
- * @version 1.1.6
- */
+ * @version 1.1.7
+*/
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
 Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.6
+Version: 1.1.7
 Author URI: http://www.mywebtonet.com 
 */
 
@@ -43,6 +43,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	global $ourdatamysql55;
 	global $ourdataphp55;
 	global $runquerycount;
+	global $headertext;
 
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	mywebtonetperftest_createtable();
@@ -68,7 +69,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 
 	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
-	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>		
+	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>/mywebtonetlogo.png" border=0></a></td></tr></table>		
 	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
@@ -107,7 +108,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 	<tr><td valign='top' align='left'>MySQL performance Index</td><td valign='top' align='left'><font color='blue'><b><?php echo sprintf("%10.0f",10000/(($getdata->mysqlresult)/3));?></b></td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Network test</b></td></tr>
-	<tr><td valign='top' align='left'>Fetch data from nearest google CDN point</td><td valign='top' align='left'><font color='blue'><b><?php echo $getdata->networktest;?></b></font> Mbps</td></font>
+	<tr><td valign='top' align='left'>Fetch data from nearest google CDN point</td><td valign='top' align='left'><font color='blue'><b><?php echo $getdata->networktest;?></b></font> Mbps</td></tr>
 	<tr><td><br></td></tr>
 	<tr><td valign='top' align='left'><b>Summary</b></td></tr>
 	<tr><td valign='top' align='left'>Total</td><td valign='top' align='left'><font color='blue'><b><?php echo sprintf("%10.2f",$getdata->phpresult+$getdata->mysqlresult);?></b></font></td>
@@ -224,13 +225,12 @@ function mywebtonetperftest_showlist() {
 function mywebtonetperftest_createtable() {
 	global $wpdb;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
-	// if not exists... < 1.0.5
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add networktest decimal(10,2) NOT NULL DEFAULT '0.00'");
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add apacheversion varchar(100) NOT NULL DEFAULT ''");
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add uploadmaxsize varchar(10) NOT NULL DEFAULT ''");
 	$altertable = $wpdb->query("ALTER TABLE $tableprefix add maxexectime int NOT NULL DEFAULT '0'");
-	//	
+	
 	$createtable = $wpdb->query( "
 	CREATE TABLE if not exists `$tableprefix` (
 	  `uniqid` bigint(20) NOT NULL auto_increment,
@@ -304,10 +304,10 @@ function mywebtonetperftest_plugin_all() {
 	global $mysqlresults;
 	global $ourdatamysql55;
 	global $ourdataphp55;
-	//	
+		
 	$getcwdpath	= getcwd();
 	$servermode	= $_SERVER['GATEWAY_INTERFACE'];
-	//
+	
 	
 	$servername	= $_SERVER['SERVER_NAME'];
 	$serveraddr	= $_SERVER['SERVER_ADDR'];
@@ -319,11 +319,10 @@ function mywebtonetperftest_plugin_all() {
 	$uploadmaxsize 	= ini_get("upload_max_filesize");
 	$mysqlversion 	= $wpdb->get_var( "select version();" );
 	$maxexectime	= ini_get('max_execution_time');
-//	$apacheversion  = apache_get_version();
 
 	$apacheversion = (function_exists('apache_get_version')) ? apache_get_version() : ''; 
 	if ($apacheversion == "") {
-		$apacheversion 	= "Test not implemented yet";
+		$apacheversion 	= "Test not implemented yet/unknown web server";
 	}
 
 	$loadedmodules = (function_exists('apache_get_modules')) ? apache_get_modules() : ''; 
@@ -332,10 +331,7 @@ function mywebtonetperftest_plugin_all() {
 	}
 
 
-	//
-	// General information about server etc etc, we always show these		
-	//
-//	echo "<br>\n";
+
 	?>
 	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
 	<?php
@@ -367,9 +363,9 @@ function mywebtonetperftest_plugin_all() {
 
 
         echo "<tr><td valign='top'>MySQL version</td><td><font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
-	//
-	// Windows shouldn't give us the load average
-	//	
+	/*
+	 Windows shouldn't give us the load average
+	*/	
 	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		echo "<tr><td valign='top'>Server load now:</td><td valign='top' align='right'><b>Unable to fetch load as windows is used for webserver (incompatible)</b></td></tr>\n";
 	} else {
@@ -386,20 +382,13 @@ function mywebtonetperftest_plugin_all() {
         DoMySQL();
         DoPHPTests();
 	$networktest = test_Network();
-	//
-	//
-	//
 
-        //
-        // Store results in DB
-	//
+
 	mywebtonetperftest_createtable();
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	$phpuname = addslashes($phpuname);
 	$storeresults = $wpdb->query("insert into $tableprefix (servername,serveraddr,phpversion,memorylimit,postmaxsize,mysqlversion,phpos,serverloadnow,serverload5,serverload15,mysql1,mysql2,mysql3,php1,php2,php3,php4,phpuname,queryresult,networktest,apacheversion,uploadmaxsize,maxexectime) values ('$servername','$serveraddr','$phpversion','$memorylimit','$postmaxsize','$mysqlversion','$phpos','$load[0]','$load[1]','$load[2]','$mysqlresults[0]','$mysqlresults[1]','$mysqlresults[2]','$testmathresult','$teststringresult','$testloopresult','$testifelseresult','$phpuname','$queryresult','$networktest','$apacheversion','$uploadmaxsize','$maxexectime');");
-        //
-	// Finish
-	// 
+        
 	echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><b>All tests:</b></td></tr>\n";
 	echo "<tr><td valign='top' width=20%>Total time</td><td valign='top' width=58%><b>(all MySQL + PHP tests)</td><td valign='top' width=22%> :<font color='blue'><b>".sprintf("%6.2f",$PHPtotaltime+$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
@@ -564,7 +553,7 @@ function DoMySQL() {
 	for ($i = 0; $i < $count; $i++) {
 		$mysqltemp = $mysqltemp.",".$mysqlresults[$i];
 	}	
-	if (!$mysqlerror) {
+	if ( ! isset( $mysqlerror ) ) {
 		echo "<tr><td valign='top'>Total time</td><td valign='top'><b>(all MySQL tests)</b></td><td valign='top'> :<font color='blue'><b>".sprintf("%6.2f",$MySQLtotaltime)."</b></font> seconds</td></tr></table>\n";	
 	} else {
 		$MySQLtotaltime = 99.99;
@@ -629,12 +618,12 @@ function test_StringManipulation($count = 100000) {
 
 
 function test_Network() {
-	//
-	// get hostnames in DNS cache
-	//
+	/*
+	* get hostnames in DNS cache
+	*/
         $dummy = file_get_contents('http://www.mywebtonet.com/1mbfile');
         $dummy = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
-	//
+	
 	$time_start = microtime(true);
 	$data = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
         $data .= file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
@@ -645,15 +634,15 @@ function test_Network() {
 	$time_end = microtime(true) - $time_start;
 	$lenfile = strlen($data);
 	$mbps = sprintf('%.2f', (($lenfile * 8) / 1024 / 1024) / $time_end);
-	//	
-	// again, up against our servers in Europe
-	//
+	/*	
+	* again, up against our servers in Europe
+	*/
 	$whtime_start = microtime(true);
 	$whdata = file_get_contents('http://www.mywebtonet.com/1mbfile');
     	$whtime_end = microtime(true) - $whtime_start;
 	$whlenfile = strlen($whdata);
 	$whmbps = sprintf('%.2f', (($whlenfile * 8) / 1024 / 1024) / $whtime_end);
-	//
+	
         echo "<table width=70%>\n";
 	echo "<tr><td valign='top'><B>Network test:</b></td></tr>\n";
 	echo "<tr><td valign='top' width=20%>Network test 1: </td><td valign='top' width=58%><font color='blue'><b>Fetch data from nearest google CDN point</b></font></td><td valign='top' width=22%>:<font color='blue'><b> $mbps</b></font> Mbps</td></tr>\n";	
