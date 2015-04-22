@@ -319,7 +319,7 @@ function mywebtonetperftest_plugin_all() {
 	$uploadmaxsize 	= ini_get("upload_max_filesize");
 	$mysqlversion 	= $wpdb->get_var( "select version();" );
 	$maxexectime	= ini_get('max_execution_time');
-
+	$phpinilocation	= php_ini_loaded_file();
 	$apacheversion = (function_exists('apache_get_version')) ? apache_get_version() : ''; 
 	if ($apacheversion == "") {
 		$apacheversion 	= "Test not implemented yet/unknown web server";
@@ -344,6 +344,7 @@ function mywebtonetperftest_plugin_all() {
 	echo "<tr><td valign='top'>PHP post_max_size</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
 	echo "<tr><td valign='top'>PHP upload_max_size</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
 	echo "<tr><td valign='top'>PHP max_execution_time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP ini file location</td><td><font color='blue'><b>".$phpinilocation."</b></font></td></tr>\n";
 	if ($apacheversion != "") {
 		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
 	}
