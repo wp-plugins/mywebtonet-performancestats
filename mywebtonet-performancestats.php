@@ -337,7 +337,7 @@ function mywebtonetperftest_plugin_all() {
 	<?php
 	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center>\n";
         echo "<table>\n";
-        echo "<tr><td valign='top'>Server : $servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Server</td><td><font color='blue'><b>$servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
         echo "<tr><td valign='top'>PHP host information</td><td><font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
         echo "<tr><td valign='top'>PHP version</td><td><font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
 	echo "<tr><td valign='top'>PHP memory limit</td><td><font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
