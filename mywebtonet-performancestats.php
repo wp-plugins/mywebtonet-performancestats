@@ -349,7 +349,7 @@ function mywebtonetperftest_plugin_all() {
 		echo "<tr><td valign='top'>Webserver:</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
 	}
 	if ($loadedmodules != "") {
-		echo "<tr><td valign='top' width='60%'>Loaded webserver modules:</td><td style='word-wrap:'><font color='blue'><b>";
+		echo "<tr><td valign='top'>Loaded webserver modules:</td><td style='word-wrap:'><font color='blue'><b>";
 		$arrlength=count($loadedmodules);
 		for($x=0;$x<$arrlength;$x++)
 		  {
