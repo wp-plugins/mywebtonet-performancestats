@@ -335,21 +335,21 @@ function mywebtonetperftest_plugin_all() {
 	?>
 	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
 	<?php
-	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center>\n";
+	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center><br><br>\n";
         echo "<table>\n";
-        echo "<tr><td valign='top'>Server</td><td><font color='blue'><b>$servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
-        echo "<tr><td valign='top'>PHP host information</td><td><font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
-        echo "<tr><td valign='top'>PHP version</td><td><font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP memory limit</td><td><font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP post_max_size</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP upload_max_size</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP max_execution_time</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
-	echo "<tr><td valign='top'>PHP ini file location</td><td><font color='blue'><b>".$phpinilocation."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Server:</td><td><font color='blue'><b>$servername@<font color='blue'><b>".$serveraddr."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>PHP host information:</td><td><font color='blue'><b>".$phpuname."</b></font></td></tr>\n";   
+        echo "<tr><td valign='top'>PHP version:</td><td><font color='blue'><b>".$phpversion."</B></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP memory limit:</td><td><font color='blue'><b>".$memorylimit."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP post_max_size:</td><td><font color='blue'><b>".$postmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP upload_max_size:</td><td><font color='blue'><b>".$uploadmaxsize."</b></font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP max_execution_time:</td><td><font color='blue'><b>".$maxexectime."</b> seconds</font></td></tr>\n";
+	echo "<tr><td valign='top'>PHP ini file location:</td><td><font color='blue'><b>".$phpinilocation."</b></font></td></tr>\n";
 	if ($apacheversion != "") {
-		echo "<tr><td valign='top'>Webserver</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
+		echo "<tr><td valign='top'>Webserver:</td><td><font color='blue'><b>".$apacheversion."</b></font></td></tr>\n";
 	}
 	if ($loadedmodules != "") {
-		echo "<tr><td valign='top'>Loaded webserver modules</td><td style='word-wrap:'><font color='blue'><b>";
+		echo "<tr><td valign='top' width='60%'>Loaded webserver modules:</td><td style='word-wrap:'><font color='blue'><b>";
 		$arrlength=count($loadedmodules);
 		for($x=0;$x<$arrlength;$x++)
 		  {
@@ -357,10 +357,10 @@ function mywebtonetperftest_plugin_all() {
 		  }  	
 		  echo "</td></tr>\n";
 	}
-        echo "<tr><td valign='top'>Platform</td><td><font color='blue'><b>".$phpos."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Platform:</td><td><font color='blue'><b>".$phpos."</b></font></td></tr>\n";
 
-        echo "<tr><td valign='top'>Gateway interface</td><td><font color='blue'><b>".$servermode."</b></font></td></tr>\n";
-        echo "<tr><td valign='top'>Path to files</td><td><font color='blue'><b>".$getcwdpath."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Gateway interface:</td><td><font color='blue'><b>".$servermode."</b></font></td></tr>\n";
+        echo "<tr><td valign='top'>Path to files:</td><td><font color='blue'><b>".$getcwdpath."</b></font></td></tr>\n";
 
 
         echo "<tr><td valign='top'>MySQL version</td><td><font color='blue'><b>".$mysqlversion."</font></b></td></tr>";
