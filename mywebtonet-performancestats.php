@@ -1,15 +1,15 @@
 <?php
 /*
  * @package mywebtonet performance statistics
- * @version 1.1.7
+ * @version 1.1.8
 */
 /*
 Plugin Name: PHP/MySQL CPU performance statistics
 Plugin URI: http://wordpress.org/plugins/mywebtonet-performancestats/
-Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server + a network test as well.
+Description: A benchmark plugin that dynotests CPU performance on your web and MySQL server and does a network bandwidth test.
 Author: Mywebtonet.com / Webhosting.dk
-Version: 1.1.7
-Author URI: http://www.mywebtonet.com 
+Version: 1.1.8
+Author URI: http://www.webhosting.dk 
 */
 
 $mysqlquerydata = str_repeat ("X" , 1000 );
@@ -69,8 +69,8 @@ function mywebtonetperftest_showfromdb($showtype) {
 
 	$cresult = sprintf("%0.0f",$runquerycount /$getdata->queryresult);
 	?>
-	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>/mywebtonetlogo.png" border=0></a></td></tr></table>		
-	<table width='90%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
+	<table width='95%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>/mywebtonetlogo.png" border=0></a></td></tr></table>		
+	<table width='95%' cellpadding=2 cellspacing=2 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td width=50%>
 	<table border=0>
 	<tr><td valign='top' align='left'>Time of test</td><td valign='top' align='left'><font color='blue'><a href='http://<?php echo $getdata->servername ?>' target=_blank</a><?php echo $getdata->tt;?></font></td></tr>
@@ -169,8 +169,8 @@ function mywebtonetperftest_showlist() {
 	<br>
 	P.I = PHP performance Index<br>
 	M.I = MySQL performance Index<br>
-	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
-	<table width='90%' border=1 cellpadding=1 cellspacing=1 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
+	<table width='95%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
+	<table width='95%' border=1 cellpadding=1 cellspacing=1 style='background: #FFFFFF;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border: 2px solid #cccccc;'>
 	<tr><td>Time of test</td><td>Server name</td><td>Server addr</td><td>PHP version</td><td>MySQL version</td><td>MySQL test time</td><td>PHP Test time</td><td>Total time</td><td>P.I</td><td>M.I</td></tr>	
 	<?php
 	echo "<tr><td>Sunday 26nd January 2014 07:31:32</td>
@@ -333,7 +333,7 @@ function mywebtonetperftest_plugin_all() {
 
 
 	?>
-	<table width='90%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
+	<table width='95%'><tr><td width='40%'></td><td width='20%'><h3><?php echo $headertext ?></h3></td><td width='40%' align='right'><a href='http://www.mywebtonet.com' target=_blank><img src="<?php echo MYWEB_URL; ?>mywebtonetlogo.png" border=0></a></td></tr></table>	
 	<?php
 	echo "<center>Compare with results below, <a href='#footer'><b>click to view</b></a></center><br><br>\n";
         echo "<table>\n";
@@ -397,7 +397,7 @@ function mywebtonetperftest_plugin_all() {
 	?>
 	<center>
 	<br>
-	<table width='90%' cellpadding=2 cellspacing=6 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
+	<table width='95%' cellpadding=2 cellspacing=6 style='background: #FFFFFF;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border: 2px solid #cccccc;'>
 	<tr><td valign='top' align='left'>
 	By submitting results we can evaluate figures and compare one test to the other. No tests will ever get disclosed. If you <b>do not want</b> this information to be submitted, please do <b>not</B> press the submit button.
 	</td></tr></table>
@@ -622,7 +622,7 @@ function test_Network() {
 	/*
 	* get hostnames in DNS cache
 	*/
-        $dummy = file_get_contents('http://www.mywebtonet.com/1mbfile');
+        $dummy = file_get_contents('http://static.webhosting.dk/1mbfile');
         $dummy = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js');
 	
 	$time_start = microtime(true);
@@ -639,7 +639,7 @@ function test_Network() {
 	* again, up against our servers in Europe
 	*/
 	$whtime_start = microtime(true);
-	$whdata = file_get_contents('http://www.mywebtonet.com/1mbfile');
+	$whdata = file_get_contents('http://static.webhosting.dk/1mbfile');
     	$whtime_end = microtime(true) - $whtime_start;
 	$whlenfile = strlen($whdata);
 	$whmbps = sprintf('%.2f', (($whlenfile * 8) / 1024 / 1024) / $whtime_end);
