@@ -314,6 +314,8 @@ function mywebtonetperftest_plugin_all() {
 	$servername	= $_SERVER['SERVER_NAME'];
 	$serveraddr	= $_SERVER['SERVER_ADDR'];
 	$phpversion	= PHP_VERSION;
+	$phpmajorversion= PHP_MAJOR_VERSION;
+
 	$phpos		= PHP_OS;
 	$phpuname	= php_uname();
 	$memorylimit 	= ini_get("memory_limit");
@@ -434,6 +436,7 @@ function mywebtonetperftest_plugin_all() {
 		$datamysql = array("Query result" => $queryresult,"MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
 	?>
+		<?php if ($phpmajorversion<7) { ?>	
 		<td valign='top' align='left'>
 			<table>
 			<tr>
@@ -447,6 +450,7 @@ function mywebtonetperftest_plugin_all() {
 			</tr>	
 			</table>		
 		</td>
+		<?php } ?>
 	</table><br>		
 	<?php
 	ShowFooter();
