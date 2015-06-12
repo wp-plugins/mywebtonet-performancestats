@@ -225,11 +225,13 @@ function mywebtonetperftest_showlist() {
 function mywebtonetperftest_createtable() {
 	global $wpdb;
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
-	$altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
-	$altertable = $wpdb->query("ALTER TABLE $tableprefix add networktest decimal(10,2) NOT NULL DEFAULT '0.00'");
-	$altertable = $wpdb->query("ALTER TABLE $tableprefix add apacheversion varchar(100) NOT NULL DEFAULT ''");
-	$altertable = $wpdb->query("ALTER TABLE $tableprefix add uploadmaxsize varchar(10) NOT NULL DEFAULT ''");
-	$altertable = $wpdb->query("ALTER TABLE $tableprefix add maxexectime int NOT NULL DEFAULT '0'");
+	
+	// $altertable = $wpdb->query("ALTER TABLE $tableprefix add queryresult decimal(10,2) NOT NULL DEFAULT '0.00'");
+	// $altertable = $wpdb->query("ALTER TABLE $tableprefix add networktest decimal(10,2) NOT NULL DEFAULT '0.00'");
+	// $altertable = $wpdb->query("ALTER TABLE $tableprefix add apacheversion varchar(100) NOT NULL DEFAULT ''");
+	// $altertable = $wpdb->query("ALTER TABLE $tableprefix add uploadmaxsize varchar(10) NOT NULL DEFAULT ''");
+	// $altertable = $wpdb->query("ALTER TABLE $tableprefix add maxexectime int NOT NULL DEFAULT '0'");
+	
 	
 	$createtable = $wpdb->query( "
 	CREATE TABLE if not exists `$tableprefix` (
