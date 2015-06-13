@@ -45,6 +45,8 @@ function mywebtonetperftest_showfromdb($showtype) {
 	global $runquerycount;
 	global $headertext;
 
+	$phpmajorversion= PHP_MAJOR_VERSION;
+
 	$tableprefix = $wpdb->prefix."mywebtonetperfstatsresults";
 	mywebtonetperftest_createtable();
 	?>
@@ -118,6 +120,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
 
 	?>		
+		<?php if ($phpmajorversion<7) { ?>
 		<td valign='top' align='left'>
 			<table>
 			<tr>
@@ -131,6 +134,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 			</tr>	
 			</table>		
 		</td>
+		<?php } ?>
 		
 	</td></tr>
 	</table>
