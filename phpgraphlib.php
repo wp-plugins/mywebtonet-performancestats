@@ -1,4 +1,4 @@
-<?php
+<?php 
 ///////////////////////////////////////////////////////////
 //PHPGraphLib -  PHP Graphing Library v2.31
 //Author: Elliott Brueggeman

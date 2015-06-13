@@ -109,9 +109,7 @@ instead of just
 Minor code corrections
 
 = 1.1.8 =
-Some servers failed to do the network test (openssl errors). We now do the test directly from a nonssl enabled server. Charts does not work on 
-PHP 7.0 so the charts are disabled until we have fixed this.
-
+Some servers failed to do the network test (openssl errors). We now do the test directly from a nonssl enabled server.
 
 == Upgrade Notice ==
 
@@ -174,5 +172,4 @@ instead of just
 Minor code corrections
 
 = 1.1.8 =
-Some servers failed to do the network test (openssl errors). We now do the test directly from a nonssl enabled server. Charts does not work on 
-PHP 7.0 so the charts are disabled until we have fixed this.
+Some servers failed to do the network test (openssl errors). We now do the test directly from a nonssl enabled server.

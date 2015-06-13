@@ -120,7 +120,7 @@ function mywebtonetperftest_showfromdb($showtype) {
 		$dataphp = array("PHP 1" => $getdata->php1,"PHP 2" => $getdata->php2,"PHP 3" => $getdata->php3,"PHP 4" => $getdata->php4);	
 
 	?>		
-		<?php if ($phpmajorversion<7) { ?>
+		<?php if ($phpmajorversion<8) { ?>
 		<td valign='top' align='left'>
 			<table>
 			<tr>
@@ -440,7 +440,7 @@ function mywebtonetperftest_plugin_all() {
 		$datamysql = array("Query result" => $queryresult,"MySQL 1" => $mysqlresults[0],"MySQL 2" => $mysqlresults[1],"MySQL 3" => $mysqlresults[2]);	
 		$dataphp = array("Mathresult" => $testmathresult,"StringManipulation " => $teststringresult,"Loop" => $testloopresult,"IfElse" => $testifelseresult);	
 	?>
-		<?php if ($phpmajorversion<7) { ?>	
+		<?php if ($phpmajorversion<8) { ?>	
 		<td valign='top' align='left'>
 			<table>
 			<tr>
