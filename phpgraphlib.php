@@ -639,10 +639,10 @@ class PHPGraphLib {
 			}
 		}
 	}
-	function imagelinedashed(&$image_handle, $x_axis_x1, $yLocation, $x_axis_x2 , $yLocation, $color) {
+	function imagelinedashed(&$image_handle, $x_axis_x1, $yLocation, $x_axis_x2 , $yLocation2, $color) {
 		$step  = 3;
 		for ($i = $x_axis_x1; $i < $x_axis_x2 -1; $i += ($step*2)) {
-			imageline($this->image, $i, $yLocation,  $i + $step - 1, $yLocation, $color);
+			imageline($this->image, $i, $yLocation,  $i + $step - 1, $yLocation2, $color);
 		}
 	}
 	function generateGrids() {
